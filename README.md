@@ -1,5 +1,5 @@
 # TOC-Project
-### To run
+## To run
 ### Download the dependencies
 `pip install -r requirement.txt`
 
@@ -7,6 +7,7 @@
 
 for mac, linux
 `export FLASK_APP=run.py`
+
 for windows
 `set FLASK_APP=run.py`
 
