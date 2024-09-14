@@ -1,0 +1,45 @@
+name: flask Pipeline
+run-name: Flask Pipeline eiei 🤡🤡
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      -main
+
+jobs:
+  Flask and React run:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        users: actions/checkout@v3
+      
+      - name: Build and run compose
+        run: |
+          docker-compose down
+          docker-compose up --build
+
+      - name: Health check for Flask backend
+        run: |
+          echo "Waiting for Flask to be ready..."
+          sleep 10  # Wait for Flask app to start
+          STATUS_CODE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:8080/member)
+          if [ "$STATUS_CODE" -ne 200 ]; then
+            echo "Health check failed with status code: $STATUS_CODE"
+            exit 1
+          else
+            echo "Health check passed! Flask is running correctly."
+          fi
+
+      - name: Health check for React frontend
+        run: |
+          echo "Waiting for React frontend to be ready..."
+          sleep 10  # Wait for React frontend to start
+          STATUS_CODE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:80)
+          if [ "$STATUS_CODE" -ne 200 ]; then
+            echo "Health check failed for React with status code: $STATUS_CODE"
+            exit 1
+          else
+            echo "Health check passed for React! Frontend is running correctly."
+          fi
+      
