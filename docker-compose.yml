@@ -1,0 +1,23 @@
+version: '3'
+services:
+  backend:
+    build: ./backend  
+    ports:
+      - "8080:8080"
+    environment:
+      - FLASK_APP=app
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=8080
+    networks:
+      - web-network
+
+  frontend:
+    build: ./frontend  
+    ports:
+      - "80:80"  
+    networks:
+      - web-network
+
+networks:
+  web-network:
+  
