@@ -14,7 +14,9 @@ services:
   frontend:
     build: ./frontend  
     ports:
-      - "80:80"  
+      - "80:80"
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:8080
     networks:
       - web-network
 
