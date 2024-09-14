@@ -17,7 +17,7 @@ jobs:
       - name: Build and run compose
         run: |
           docker-compose down
-          docker-compose up --build
+          docker-compose up --build -d
 
       - name: Health check for Flask backend
         run: |
