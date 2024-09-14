@@ -8,11 +8,11 @@ on:
       -main
 
 jobs:
-  Flask and React run:
+  Flask_and_React_run:
     runs-on: self-hosted
     steps:
       - name: Checkout code
-        users: actions/checkout@v3
+        uses: actions/checkout@v3
       
       - name: Build and run compose
         run: |
