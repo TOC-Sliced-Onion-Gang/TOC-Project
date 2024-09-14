@@ -3,3 +3,5 @@ app = Flask(__name__)
 
 from app import routes
 
+def create_app():
+    return app
