@@ -5,5 +5,5 @@
 
 
 ### Run app
-`flask --app app/routes.py run`
+`flask --app app/__init__.py run`
 
