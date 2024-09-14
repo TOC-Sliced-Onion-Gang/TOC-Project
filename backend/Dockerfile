@@ -10,4 +10,4 @@ ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=8080
 EXPOSE 8080
 
-CMD ["flask","--app","app/routes.py", "run"]
+CMD ["waitress-serve","--host","127.0.0.1", "--call", "app:create_app"]
