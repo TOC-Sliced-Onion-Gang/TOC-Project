@@ -1,0 +1,13 @@
+FROM python:3.12-alpine
+WORKDIR /code
+
+COPY requirement.txt requirement.txt
+RUN pip install --no-cache-dir -r requirement.txt
+
+COPY . .
+
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=8080
+EXPOSE 8080
+
+CMD ["flask","--app","app/routes.py", "run"]
