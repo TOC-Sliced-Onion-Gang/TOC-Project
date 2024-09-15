@@ -20,8 +20,7 @@ jobs:
           docker-compose up --build -d
         env:
           CF_TOKEN: ${{ secrets.CF_TOKEN }}
-          REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
-
+          
       - name: Health check for Flask backend
         run: |
           echo "Waiting for Flask to be ready..."
