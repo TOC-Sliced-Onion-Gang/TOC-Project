@@ -18,6 +18,8 @@ jobs:
         run: |
           docker-compose down
           docker-compose up --build -d
+        env:
+          CF_TOKEN: ${{ secrets.CF_TOKEN }}
 
       - name: Health check for Flask backend
         run: |

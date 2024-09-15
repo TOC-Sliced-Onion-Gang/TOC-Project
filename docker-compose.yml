@@ -22,8 +22,7 @@ services:
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run --token ${CF_TOKEN}
     restart: always
-    environment:
-      - CF_TOKEN
+
 
 networks:
   web-network:
