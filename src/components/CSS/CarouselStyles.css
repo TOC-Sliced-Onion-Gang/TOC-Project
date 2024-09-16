@@ -1,0 +1,69 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.carousel {
+    width: 300px;
+    margin: 0 10px;
+}
+
+.card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.avatar {
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.lib-name {
+    font-weight: bold;
+}
+
+.author {
+    color: gray;
+}
+
+.card-body {
+    margin-top: 20px;
+}
+
+.expand-button {
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.prev, .next {
+    background-color: purple;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
