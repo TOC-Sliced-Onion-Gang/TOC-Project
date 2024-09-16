@@ -24,7 +24,7 @@ jobs:
         run: |
           cat .env
           docker-compose down
-          docker-compose up --build -d --build-arg REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }}
+          docker-compose up --build -d 
 
       - name: Health check for Flask backend
         run: |
