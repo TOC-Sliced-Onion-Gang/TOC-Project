@@ -33,7 +33,7 @@ export default function App() {
 
   const [data, setData] = useState([{}]);
   
-  console.log(${process.env.REACT_APP_BACKEND_URL});
+  console.log(`${process.env.REACT_APP_BACKEND_URL}`);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/member`)
