@@ -14,22 +14,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Create env
+      - name: 'Create env file'
         run: |
-          chmod +x ./create-env.sh
-          ./create-env.sh
-        env:
-          REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
-          CF_TOKEN: ${{ secrets.CF_TOKEN }}
-
+          echo REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }} >> .env
+          echo CF_TOKEN=${{ secrets.CF_TOKEN }} >> .env
+          cat .env
+          
       - name: Build and run compose
         run: |
           docker-compose down
           docker-compose up --build -d         
-
-      - name: Check environment variables in the frontend container
-        run: |
-          docker-compose exec -T frontend printenv | grep REACT_APP_BACKEND_URL
 
       - name: Health check for Flask backend
         run: |
