@@ -14,7 +14,7 @@ services:
   frontend:
     build: ./frontend  
     env_file:
-      - .env 
+      - .env
     ports:
       - "80:80"
     networks:
