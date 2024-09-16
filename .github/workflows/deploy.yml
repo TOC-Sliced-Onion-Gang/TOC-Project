@@ -25,7 +25,11 @@ jobs:
       - name: Build and run compose
         run: |
           docker-compose down
-          docker-compose up --build -d          
+          docker-compose up --build -d         
+
+      - name: Check environment variables in the frontend container
+        run: |
+          docker-compose exec frontend printenv | grep REACT_APP_BACKEND_URL
 
       - name: Health check for Flask backend
         run: |
