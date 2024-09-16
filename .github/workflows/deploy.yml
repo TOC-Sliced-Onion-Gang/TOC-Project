@@ -19,12 +19,12 @@ jobs:
           echo REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }} >> .env
           echo CF_TOKEN=${{ secrets.CF_TOKEN }} >> .env
           cat .env
-          
+
       - name: Build and run compose
         run: |
           cat .env
           docker-compose down
-          docker-compose up --build -d 
+          docker-compose up --build -d
 
       - name: Health check for Flask backend
         run: |

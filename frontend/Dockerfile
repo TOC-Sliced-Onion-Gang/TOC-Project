@@ -9,6 +9,8 @@ RUN npm install
 
 COPY . .
 
+RUN env
+
 RUN echo "REACT_APP_BACKEND_URL is set to: $REACT_APP_BACKEND_URL"
 
 RUN npm run build
