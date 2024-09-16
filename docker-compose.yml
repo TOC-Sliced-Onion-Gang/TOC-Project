@@ -13,10 +13,20 @@ services:
 
   frontend:
     build: ./frontend  
+    env_file:
+      - .env 
     ports:
-      - "80:80"
+      - "3000:3000"
     networks:
       - web-network
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${CF_TOKEN}
+    restart: always
+    networks:
+      - web-network
+
 
 networks:
   web-network:

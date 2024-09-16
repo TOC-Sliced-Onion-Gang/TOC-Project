@@ -32,7 +32,6 @@ function ButtonUsage() {
 export default function App() {
 
   const [data, setData] = useState([{}]);
-  
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/member`)
       .then(res => res.json()) // Correct arrow function syntaxx
