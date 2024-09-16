@@ -42,7 +42,7 @@ jobs:
         run: |
           echo "Waiting for React frontend to be ready..."
           sleep 10  # Wait for React frontend to start
-          STATUS_CODE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:80)
+          STATUS_CODE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000)
           if [ "$STATUS_CODE" -ne 200 ]; then
             echo "Health check failed for React with status code: $STATUS_CODE"
             exit 1
