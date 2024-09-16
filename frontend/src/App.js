@@ -33,6 +33,8 @@ export default function App() {
 
   const [data, setData] = useState([{}]);
   
+  console.log(${process.env.REACT_APP_BACKEND_URL});
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/member`)
       .then(res => res.json()) // Correct arrow function syntaxx
