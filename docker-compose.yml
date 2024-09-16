@@ -13,8 +13,8 @@ services:
 
   frontend:
     build: ./frontend  
-    args:
-        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
+    env_file:
+      - .env 
     ports:
       - "80:80"
     networks:
