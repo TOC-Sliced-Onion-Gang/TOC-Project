@@ -28,12 +28,11 @@ const ResponsiveImage = styled('img')(({ theme }) => ({
         position="fixed"
         className="bg-gray-100 backdrop-blur-sm bg-opacity-70 border-b-1 shadow-none"
         style={{ 
-          marginTop : '15px' ,
           boxShadow: 'none', border: 'none', 
           display: 'flex',
           justifyContent: 'center',   // จัดให้อยู่ตรงกลางแนวนอน
           alignItems: 'center',   
-          height: '100px' }}  // กำหนดความสูงเป็น 120px
+          height: '110px' }}  // กำหนดความสูงเป็น 120px
       >
         <Container maxWidth={false} sx={{ maxWidth: '2500px' }}>
           <Toolbar>

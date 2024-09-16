@@ -4,6 +4,8 @@ import '../CSS/CarouselStyles.css';
 interface Library {
     name: string;
     author: string;
+    libname: string;
+    action: string;
     description: string;
 }
 
@@ -13,13 +15,18 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const visibleCount = 3; // Show 3 cards at a time
 
     const nextSlide = (): void => {
-      setCurrentIndex((prevIndex) => (prevIndex < libraries.length - 1 ? prevIndex + 1 : 0));
+        // Move forward by 1 card or loop back to the beginning
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % libraries.length);
     };
 
     const prevSlide = (): void => {
-      setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : libraries.length - 1))
+        // Move back by 1 card or loop to the last set
+        setCurrentIndex((prevIndex) => 
+            (prevIndex - 1 + libraries.length) % libraries.length
+        );
     };
 
     const handleScroll = (e: React.WheelEvent<HTMLDivElement>): void => {
@@ -29,14 +36,21 @@ const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
           prevSlide();
         }
 };
-
+    // Get the visible cards
+    const visibleLibraries = libraries.slice(currentIndex, currentIndex + visibleCount)
+        .concat(libraries.slice(0, Math.max(0, currentIndex + visibleCount - libraries.length)));
+        
 return (
     <div className="carousel-container" onWheel={handleScroll}>
-      <button className="prev" onClick={prevSlide}>←</button>
+      <button className="arrow-prev arrow-left" onClick={prevSlide}>←</button>
       <div className="carousel">
-        <Card library={libraries[currentIndex]} />
+        <div className="card-wrapper">
+            {visibleLibraries.map((library, index) => (
+                <Card key={index} library={library} />
+            ))}
+        </div>
       </div>
-      <button className="next" onClick={nextSlide}>→</button>
+      <button className="arrow-next arrow-right" onClick={nextSlide}>→</button>
     </div>
   );
 };
