@@ -8,16 +8,23 @@ on:
       -main
 
 jobs:
-  Flask and React run:
+  Flask_and_React_run:
     runs-on: self-hosted
     steps:
       - name: Checkout code
-        users: actions/checkout@v3
+        uses: actions/checkout@v3
       
+      - name: 'Create env file'
+        run: |
+          echo REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }} >> .env
+          echo CF_TOKEN=${{ secrets.CF_TOKEN }} >> .env
+          cat .env
+
       - name: Build and run compose
         run: |
+          cat .env
           docker-compose down
-          docker-compose up --build
+          docker-compose up --build -d
 
       - name: Health check for Flask backend
         run: |
@@ -35,7 +42,7 @@ jobs:
         run: |
           echo "Waiting for React frontend to be ready..."
           sleep 10  # Wait for React frontend to start
-          STATUS_CODE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:80)
+          STATUS_CODE=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000)
           if [ "$STATUS_CODE" -ne 200 ]; then
             echo "Health check failed for React with status code: $STATUS_CODE"
             exit 1

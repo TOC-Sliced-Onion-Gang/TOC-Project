@@ -96,4 +96,44 @@ const App = () => {
   );
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+function ButtonUsage() {
+  return <Button variant="contained">Hello world</Button>;
+}
+
+export default function App() {
+
+  const [data, setData] = useState([{}]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/member`)
+      .then(res => res.json()) // Correct arrow function syntaxx
+      .then(data => {
+        setData(data);
+        console.log(data);
+      })
+  }, []); // Added an empty dependency array to prevent infinite re-rendering
+
+  return (
+    <Container maxWidth="sm">
+      <div> 
+        {typeof data.members === 'undefined' ? ( // Removed the misplaced curly brace
+          <p>Loading...</p>
+        ) : (
+          data.members.map((member, i) => (
+            <p key={i}>{member}</p>
+          ))
+        )}
+      </div>
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
+          Material UI Create React App example
+        </Typography>
+        <Copyright />
+        <ButtonUsage />
+      </Box>
+    </Container>
+  );
+} 
+>>>>>>> 28dfe82e2bf57531455a06f8fe3b5643c7d180e9
