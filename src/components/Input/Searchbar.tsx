@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button"
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 
 // Styled components for search bar
 const Search = styled('div')(({ theme }) => ({
@@ -37,15 +38,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
-      // [theme.breakpoints.up('md')]: {
-      //   width: '20ch',
-      // },
     },
-  }));
+}));
 
 const SearchBar = () => {
-    return (
-     <Box display="flex" justifyContent="center"alignItems="center" p={2}>
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleSearch = () => {
+    if (searchTerm.trim() !== '') {
+      // Navigate to the Library component and pass the search term via state
+      navigate('/library', { state: { search: searchTerm } });
+    }
+  };
+
+  return (
+    <Box display="flex" justifyContent="center" alignItems="center" p={2}>
       <Search>
         <SearchIconWrapper>
           <SearchIcon />
@@ -53,6 +61,8 @@ const SearchBar = () => {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ 'aria-label': 'search' }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} // Handle input change
         />
         <Button
           variant="contained"
@@ -64,6 +74,7 @@ const SearchBar = () => {
             padding: '5px 20px',
             textTransform: 'none', // avoid uppercase
           }}
+          onClick={handleSearch} // Handle the button click event
         >
           GO
         </Button>

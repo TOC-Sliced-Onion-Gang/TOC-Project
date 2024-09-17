@@ -1,12 +1,15 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Header from './components/Header.tsx';
 import Carousel from './components/Card/Carousel.tsx';
-import ProgressBarWithDots from './components/ProgressBar/Progressbarwithdot.tsx'
-import './components/CSS/Functionsection.css'
-import './components/CSS/DividerTeamgrid.css'
+import ProgressBarWithDots from './components/ProgressBar/Progressbarwithdot.tsx';
+import './components/CSS/Functionsection.css';
+import './components/CSS/DividerTeamgrid.css';
+import Library from './Librarysearch.js';
+import SearchBar from './components/Input/Searchbar.tsx'; // Import the SearchBar component
 
 // Define team profile images (mock data for profiles)
 const teamProfiles = [
@@ -34,55 +37,62 @@ const libraries = [
 
 const App = () => {
   return (
-    <>
-      {/* Add the header at the top */}
+    <Router> {/* Wrap your app in the Router */}
       <Header /> 
-      <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '900px', width: '100%', marginLeft: '-2px' }}>
-        {/* Add the Carousel component here */}
-         <div className="carousel-section">
-           <Carousel libraries={libraries} />
-         </div>
-         <ProgressBarWithDots />
-         <Typography variant="h5" component="h2" gutterBottom>
-            <div className='background-suitable'>
-              Find Your Suitable Library here!!
-            </div>
-           </Typography>
-        
-        {/* Section with shadowed text and image */}
-        <section className="shadow-section">
-          <Typography variant="h4" component="h2" className="shadow-text" gutterBottom>
-            How our search function works?
-          </Typography>
-          
-          <div className="image-section">
-            <img src="../icons/function-works.jpg" alt="How our search works" className="section-image" />
-          </div>
-
-          <Typography marginTop="100px" marginBottom="200px" variant="body1" component="p" className="section-description">
-            {`Show how search function works brabra`}
-          </Typography>
-
-        </section>
-
-        {/* Divider Section */}
-        <hr className="section-divider" />
-
-        {/* Team Profiles Section */}
-        <section className="team-section">
-          <Typography textAlign="left" marginLeft= "100px" variant="h4" component="h3"  gutterBottom>
-            Teams
-          </Typography>
-          <div className="team-grid">
-            {teamProfiles.map((profile) => (
-              <div key={profile.id} className="team-member">
-                <img src={profile.image} alt={profile.name} className="team-avatar" />
+      <Routes>
+        {/* Define the route for the home page */}
+        <Route 
+          path="/" 
+          element={
+            <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '900px', width: '100%', marginLeft: '-2px' }}>
+              <div className="carousel-section">
+                <Carousel libraries={libraries} />
               </div>
-            ))}
-          </div>
-        </section>
-      </Container>
-    </>
+              <ProgressBarWithDots />
+              <Typography variant="h5" component="h2" gutterBottom>
+                <div className='background-suitable'>
+                  Find Your Suitable Library here!!
+                </div>
+              </Typography>
+
+              {/* Section with shadowed text and image */}
+              <section className="shadow-section">
+                <Typography variant="h4" component="h2" className="shadow-text" gutterBottom>
+                  How our search function works?
+                </Typography>
+
+                <div className="image-section">
+                  <img src="../icons/function-works.jpg" alt="How our search works" className="section-image" />
+                </div>
+
+                <Typography marginTop="100px" marginBottom="200px" variant="body1" component="p" className="section-description">
+                  {`Show how search function works brabra`}
+                </Typography>
+              </section>
+
+              {/* Divider Section */}
+              <hr className="section-divider" />
+
+              {/* Team Profiles Section */}
+              <section className="team-section">
+                <Typography textAlign="left" marginLeft="100px" variant="h4" component="h3" gutterBottom>
+                  Teams
+                </Typography>
+                <div className="team-grid">
+                  {teamProfiles.map((profile) => (
+                    <div key={profile.id} className="team-member">
+                      <img src={profile.image} alt={profile.name} className="team-avatar" />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </Container>
+          } 
+        />
+        {/* Define the route for the /library page */}
+        <Route path="/library" element={<Library />} />
+      </Routes>
+    </Router>
   );
 }
 

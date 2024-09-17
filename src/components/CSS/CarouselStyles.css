@@ -116,6 +116,15 @@
     font-size: 30px;
 }
 
+.background-padding-library {
+    margin-left: 0;
+    margin-top: 4%;
+    background-color: rgb(122, 174, 215);
+    padding: 10px;
+    color: black;
+    font-size: 30px;
+}
+
 .lib-name {
     font-weight: bold;
 }
@@ -169,7 +178,7 @@
     border: 2px solid black; /* Black border for the circle */
     border-radius: 50%; /* Make it circular */
     width: 50px; /* Set the size of the circle */
-    height: 50px; /* Set the size of the circle */
+    height: 45px; /* Set the size of the circle */
     display: flex;
     justify-content: center;
     align-items: center;
