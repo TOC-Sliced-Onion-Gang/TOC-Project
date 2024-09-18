@@ -10,6 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // console.log(`${process.env.REACT_APP_BACKEND_URL}`);
 root.render(
   <React.StrictMode>
+    console.log(${process.env.REACT_APP_BACKEND_URL});
+    
     <App />
   </React.StrictMode>
 );
