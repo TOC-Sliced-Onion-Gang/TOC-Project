@@ -6,8 +6,6 @@ RUN pip install --no-cache-dir -r requirement.txt
 
 COPY . .
 
-ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=8080
 EXPOSE 8080
 
-CMD ["waitress-serve","--host","0.0.0.0","--port","8080","--call", "app:create_app"]
+CMD ["waitress-serve","--host","0.0.0.0","--port","8080", "app:app"]
