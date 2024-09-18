@@ -4,4 +4,7 @@ app = Flask(__name__)
 
 CORS(app)
 
-from app import routes
+
+from app.routes import router
+
+app.register_blueprint(router)
