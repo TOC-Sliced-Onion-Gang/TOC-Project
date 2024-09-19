@@ -29,5 +29,5 @@ def search(query: str, page: int = 1):
                         'name': author.group(2),
                     },
                 'action': action and action.group(1),  
-                'description': None # description and description.group(),
+                'description': description and description.group(),
             }

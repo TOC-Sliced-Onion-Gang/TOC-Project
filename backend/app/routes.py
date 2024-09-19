@@ -9,13 +9,13 @@ router = Blueprint('router', __name__)
 def member():
     return {"members": ["Member1", "Member2", "Member3"]}
 
-@router.route('/pypi/search') # อาจจะ > 5 วิ
+@router.route('/pypi/search')
 def pypi_search(): 
     query = request.args.get('q') or ''
     page = int(request.args.get('page') or 0)
     
-    return list(pypi.search(query, page))
+    return list(pypi.search(query, page)) # metadata list, อาจจะ > 5 วิ
 
 @router.route('/shogun')
 def shogun():
-    return list(sho_section.get())
+    return list(sho_section.get()) # name list
