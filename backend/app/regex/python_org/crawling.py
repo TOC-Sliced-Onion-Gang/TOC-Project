@@ -32,3 +32,23 @@ def crawler_second_level(url):
             output = [str(re.findall(">.+</span>",str(re.findall("<span class=\"pre\">.*</span></code>",each))))[3:len(str(re.findall(">.+</span>",str(re.findall("<span class=\"pre\">.*</span></code>",each)))))-9] for each in output if str(re.findall(">.+</span>",str(re.findall("<span class=\"pre\">.*</span></code>",each))))[3:len(str(re.findall(">.+</span>",str(re.findall("<span class=\"pre\">.*</span></code>",each)))))-9] != 'winsound']
             output = list(set(output))
             return output
+    
+def search(user_type):
+    urls = crawler_first_level()
+    result = []
+    details = []
+    for url in urls :
+        for each in crawler_second_level(url):
+            if bool(re.match(f'^{re.escape(user_type)}', each)): 
+                result.append(each)
+                details.append(get_detail(each))
+    return {result[i]:details[i] for i in range(len(result))}
+
+def get_detail(module_name):
+    html = None
+    path ='https://docs.python.org/3/library/'+module_name+'.html' if module_name != 'lib2to3' else 'https://docs.python.org/3/library/2to3.html'
+    with urllib.request.urlopen(path) as response:
+        html = response.read().decode('utf-8')
+    action = re.findall(f'<meta property="og:title" content="{module_name if module_name != 'lib2to3' else '2to3'} — (.+?)"', html)
+    description = re.findall(r'<meta property="og:description" content="(.+?)"', html)
+    return {'action':action[0],'description':description[0]}
