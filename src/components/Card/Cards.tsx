@@ -3,7 +3,6 @@ import React from "react";
 interface Library {
     name: string;
     author: string;
-    libname: string;
     action: string;
     description: string;
 }
@@ -31,7 +30,7 @@ const Card: React.FC<CardProps> = ({library}) => {
                     <div className="icon-triangle"></div>
                 </div>
                 <div className="lib-description">
-                    <h3>{library.libname}</h3>
+                    <h3>This is {library.name}</h3>
                     <p>{library.action}</p>
                     <p>{library.description}</p>
                 </div>
