@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from app.regex import pypi
 from app.regex.python_org import sho_section
-from app.regex.python_org.namning_section import search as nornor
+# from app.regex.python_org.namning_section import search as nornor
+from app.regex.python_org import tung_section
 router = Blueprint('router', __name__)
 
 
@@ -9,10 +10,10 @@ router = Blueprint('router', __name__)
 def member():
     return {"members": ["Member1", "Member2", "Member3"]}
 
-@router.route('/namning')
-def namning():
-    result = nornor('')
-    return {"result":result}
+# @router.route('/namning')
+# def namning():
+#     result = nornor('')
+#     return {"result":result}
 
 @router.route('/pypi/search')
 def pypi_search(): 
@@ -24,3 +25,7 @@ def pypi_search():
 @router.route('/shogun')
 def shogun():
     return list(sho_section.get()) # name list
+
+@router.route('/tung')
+def tung():
+    return list(tung_section.get())
