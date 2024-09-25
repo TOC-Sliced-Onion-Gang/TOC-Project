@@ -48,18 +48,40 @@ def first_level(user_input):
     return f"Failed to retrieve the page. Status code: {response.status_code}"
 
 def second_level():
-    first_level_data = first_level()
+    first_level_data = first_level(user_input)
     if isinstance(first_level_data, dict):
         href = first_level_data['href']
+        response = requests.get(href)
+        html_content = response.text
     match(href):
         case 'https://docs.python.org/3.12/library/filesys.html':
-            pass
-        case 'http://docs.python.org/3.12/library/netdata.html':
-            pass
+            output = re.findall(
+            r'<li class="toctree-l1"><a class="reference internal".*?<code class="xref py py-mod docutils literal notranslate"><span class="pre">(.*?)</span></code>',
+            html_content,
+            re.DOTALL)
+            output = [match for match in output]
+            return output
+        case 'https://docs.python.org/3.12/library/netdata.html':
+            output = re.findall(
+            r'<li class="toctree-l1"><a class="reference internal".*?<code class="xref py py-mod docutils literal notranslate"><span class="pre">(.*?)</span></code>',
+            html_content,
+            re.DOTALL)
+            output = [match for match in output]
+            return output
         case 'https://docs.python.org/3.12/library/debug.html':
-            pass
+            output = re.findall(
+            r'<li class="toctree-l1"><a class="reference internal".*?<code class="xref py py-mod docutils literal notranslate"><span class="pre">(.*?)</span></code>',
+            html_content,
+            re.DOTALL)
+            output = [match for match in output]
+            return output
         case 'https://docs.python.org/3.12/library/superseded.html':
-            pass
+            output = re.findall(
+            r'<li class="toctree-l1"><a class="reference internal".*?<code class="xref py py-mod docutils literal notranslate"><span class="pre">(.*?)</span></code>',
+            html_content,
+            re.DOTALL)
+            output = [match for match in output]
+            return output
     
 if __name__ == "__main__":
-    print(first_level(user_input))
+    print(second_level())
