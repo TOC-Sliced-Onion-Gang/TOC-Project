@@ -1,6 +1,7 @@
 from flask import Blueprint, request ,jsonify
 from app.regex import pypi
 from app.regex.python_org import sho_section
+from app.regex.python_org.namning_section import search as nornor
 from app.regex.python_org.firm_section import first_level,second_level,sections
 
 router = Blueprint('router', __name__)
@@ -9,6 +10,11 @@ router = Blueprint('router', __name__)
 @router.route('/member')
 def member():
     return {"members": ["Member1", "Member2", "Member3"]}
+
+@router.route('/namning')
+def namning():
+    result = nornor('')
+    return {"result":result}
 
 @router.route('/pypi/search')
 def pypi_search(): 
