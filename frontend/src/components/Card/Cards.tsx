@@ -32,8 +32,8 @@ const Card: React.FC<CardProps> = ({library}) => {
                 </div>
                 <div className="lib-description">
                     <h3>This is {library.name}</h3>
-                    <p>{library.name}</p>
-                    <p>{library.name}</p>
+                    <p>{library.action}</p>
+                    <p>{library.description}</p>
                 </div>
                 <button className="expand-button">Expand</button>
             </div>

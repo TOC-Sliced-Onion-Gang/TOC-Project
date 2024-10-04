@@ -39,7 +39,7 @@ const App = () => {
   const [libraries, setLibraries] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/pypi/search?q=pydoc')
+    fetch('http://localhost:5000/random')
     .then((response) => response.json())
     .then((data) => {
       setLibraries(data); 
@@ -47,7 +47,7 @@ const App = () => {
       console.log(data);
     })
     .catch((error) => console.error('Error fetching data', error));
-  }, []);
+  }, [],);
 
   return (
     <Router> {/* Wrap your app in the Router */}
@@ -122,7 +122,7 @@ const App = () => {
         <Route path="/library"
            element={
             libraries ? (
-           <Library libraries={libraries} />
+           <Library />
             ) : (
               <p>Loading...</p>
             )
