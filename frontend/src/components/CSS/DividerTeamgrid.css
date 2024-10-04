@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Divider Section */
 .section-divider {
     margin: 50px 0;
@@ -37,44 +36,4 @@
     object-fit: cover;
   }
   
-=======
-/* Divider Section */
-.section-divider {
-    margin: 50px 0;
-    height: 2px;
-    background-color: #d3d3d3;
-    border: none;
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .team-section {
-    text-align: center;
-    padding: 20px 0;
-  }
-  
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 50px;
-    justify-items: center;
-    margin-top: 50px;
-  }
-  
-  .team-member {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .team-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
->>>>>>> origin/ink
   

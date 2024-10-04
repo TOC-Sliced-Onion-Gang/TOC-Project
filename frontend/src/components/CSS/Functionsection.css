@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .shadow-section {
     text-align: center;
     margin-top: 50px;
@@ -26,33 +25,4 @@
     margin-top: 20px;
     font-size: 18px;
     color: #333;
-=======
-.shadow-section {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-  }
-  
-  .shadow-text {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add shadow to text */
-    font-weight: bold;
-    font-size: 28px;
-  }
-  
-  .image-section {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .section-image {
-    width: 100%;
-    max-width: 600px; 
-  }
-  
-  .section-description {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #333;
->>>>>>> origin/ink
   }
