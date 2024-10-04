@@ -9,14 +9,17 @@ from app.regex.python_org import jw_section as jw_pyorg
 from app.regex.python_org import firm_section as firm_pyorg
 from app.regex.python_org import namning_section as namning_pyorg
 
-def get_detail(module_name):
+def get_detail(lib_names):
+    results = []
+    for module_name in lib_names:
         path ='https://docs.python.org/3/library/'+module_name+'.html' if module_name != 'lib2to3' else 'https://docs.python.org/3/library/2to3.html'
         try:
             with urllib.request.urlopen(path) as response:
                 html = response.read().decode('utf-8')
         except urllib.error.HTTPError:
-            return {'name':module_name, 'action':"No information provided",'description':"No description provided"}
-        
+            results.append({'name':module_name, 'action':"No information provided",'description':"No description provided"})
+            continue
+
         module_name = module_name if module_name != 'lib2to3' else '2to3'
         action = re.findall(f'<meta property="og:title" content="{module_name} — (.+?)"', html)
         description = re.findall(r'<meta property="og:description" content="(.+?)"', html)
@@ -24,7 +27,9 @@ def get_detail(module_name):
         if not action: action = ["No information provided"]
         if not description: description = ["No description provided"]
 
-        return {'name':module_name, 'action':action[0],'description':description[0], 'author':'-'}
+        results.append({'name':module_name, 'action':action[0],'description':description[0], 'author':'-'})
+
+    return results
 
 def get_all():
     lib_names = []
@@ -36,18 +41,15 @@ def get_all():
     lib_names += namning_pyorg.get()
 
     lib_names = list(set(lib_names))
-
-    results = []
-    for lib_name in lib_names:
-        desc = get_detail(lib_name)
-        results.append(desc)
+    
+    results = get_detail(lib_names)
 
     return results
 
 def search(keyword):
     all_regs = get_all()
-    found_libs = [lib_name for lib_name in all_regs if keyword in lib_name]
-
+    found_libs = [lib for lib in all_regs if keyword in lib["name"]]
+    
     return found_libs
 
 def get_random(num):
@@ -72,6 +74,6 @@ def get_random(num):
     lib_names = list(set(lib_names))[:num]
     random.shuffle(lib_names)
 
-    return lib_names
+    results = get_detail(lib_names)
 
-            
+    return results
