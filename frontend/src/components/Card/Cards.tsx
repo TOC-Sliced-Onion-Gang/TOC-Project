@@ -12,6 +12,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({library}) => {
+    console.log(library)
     return (
      <div className="card">
         <div className="card-header">
@@ -31,8 +32,8 @@ const Card: React.FC<CardProps> = ({library}) => {
                 </div>
                 <div className="lib-description">
                     <h3>This is {library.name}</h3>
-                    <p>{library.action}</p>
-                    <p>{library.description}</p>
+                    <p>{library.name}</p>
+                    <p>{library.name}</p>
                 </div>
                 <button className="expand-button">Expand</button>
             </div>
