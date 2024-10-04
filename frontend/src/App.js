@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Container from '@mui/material/Container';
@@ -25,17 +25,30 @@ const teamProfiles = [
 ];
 
 // Define the Library interface
-const libraries = [
-  { id: 1, name: 'Library 1', author: 'Author 1', action: 'what lib to do 1', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-  { id: 2, name: 'Library 2', author: 'Author 2', action: 'what lib to do 2', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-  { id: 3, name: 'Library 3', author: 'Author 3', action: 'what lib to do 3', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-  { id: 4, name: 'Library 4', author: 'Author 4', action: 'what lib to do 4', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-  { id: 5, name: 'Library 5', author: 'Author 5', action: 'what lib to do 5', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-  { id: 6, name: 'Library 6', author: 'Author 6', action: 'what lib to do 6', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-];
+// const libraries = [
+//   { id: 1, name: 'Library 1', author: 'Author 1', action: 'what lib to do 1', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
+//   { id: 2, name: 'Library 2', author: 'Author 2', action: 'what lib to do 2', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
+//   { id: 3, name: 'Library 3', author: 'Author 3', action: 'what lib to do 3', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
+//   { id: 4, name: 'Library 4', author: 'Author 4', action: 'what lib to do 4', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
+//   { id: 5, name: 'Library 5', author: 'Author 5', action: 'what lib to do 5', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
+//   { id: 6, name: 'Library 6', author: 'Author 6', action: 'what lib to do 6', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
+// ];
 
 
 const App = () => {
+  const [libraries, setLibraries] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/pypi/search?q=pydoc')
+    .then((response) => response.json())
+    .then((data) => {
+      setLibraries(data); 
+      console.log(libraries);
+      console.log(data);
+    })
+    .catch((error) => console.error('Error fetching data', error));
+  }, []);
+
   return (
     <Router> {/* Wrap your app in the Router */}
       <Header /> 
@@ -44,9 +57,23 @@ const App = () => {
         <Route 
           path="/" 
           element={
-            <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '900px', width: '100%', marginLeft: '-2px' }}>
+          <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '900px', width: '100%', marginLeft: '-2px' }}>
+              {libraries ? (
+                <div>
+                  <p>Data fetched successfully</p>
+                  <ul>
+
+                  </ul>
+                </div>
+              ) : (
+                <p>Loading...</p>
+              )}
               <div className="carousel-section">
-                <Carousel libraries={libraries} />
+                {libraries ? (
+                  <Carousel libraries={libraries} />
+                ) : (
+                  <p>Carousel Loading...</p>
+                )}
               </div>
               <ProgressBarWithDots />
               <Typography variant="h5" component="h2" gutterBottom>
@@ -92,7 +119,15 @@ const App = () => {
         />
         {/* Define the route for the /library page */}
         {/* <Route path="/library" element={<Library />} /> */}
-        <Route path="/library" element={<Library libraries={libraries} />} />
+        <Route path="/library"
+           element={
+            libraries ? (
+           <Library libraries={libraries} />
+            ) : (
+              <p>Loading...</p>
+            )
+           }
+        />
       </Routes>
     </Router>
   );
