@@ -69,6 +69,9 @@ def get_random(num):
         case _:
             lib_names = namning_pyorg.get()
     
-    return random.shuffle(lib_names)[:num]
+    lib_names = list(set(lib_names))[:num]
+    random.shuffle(lib_names)
+
+    return lib_names
 
             

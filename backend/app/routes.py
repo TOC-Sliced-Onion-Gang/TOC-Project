@@ -1,5 +1,5 @@
 from flask import Blueprint, request ,jsonify
-from app.regex.combine_regex import get_all as get_all_regex, get_random, search
+from app.regex.combine_regex import get_all as get_all_regex, get_random, search as search_regex
 from app.regex.pypi import shogun
 from app.regex.python_org import sho_section
 from app.regex.python_org import tung_section
@@ -29,7 +29,7 @@ def random():
 @router.route('/search')
 def search():
     query = request.args.get('q') or ''
-    found_libs = search(query)
+    found_libs = search_regex(query)
 
     return found_libs
 
