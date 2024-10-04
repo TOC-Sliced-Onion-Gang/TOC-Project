@@ -17,27 +17,16 @@ const Library = ( ) => {
     .then((response) => response.json())
     .then((data) => {
       setLibraries(data); 
-      console.log(libraries);
-      console.log(data);
+      console.log(data);  
     })
     .catch((error) => console.error('Error fetching data', error));
-  }, [],);
+  }, [searchTerm]);  
 
 
   const handleItemClick = (item) => {
-    setActiveItem(item); // Update the clicked item
+    setActiveItem(item); 
   };
   
-  // Filter libraries based on the selected category
-  // const filteredLibraries = () => {
-  //   if (activeItem === 'official') {
-  //     return libraries.filter((lib) => lib.id === 1 || lib.id === 2); // Show only libraries 1-2
-  //   } else if (activeItem === 'community') {
-  //     return libraries.filter((lib) => lib.id >= 4 && lib.id <= 6); // Show only libraries 4-6
-  //   }
-  //   return libraries; // Show all libraries (1-6) by default
-  // };
-
   return (
     <Container 
       maxWidth={false} 
@@ -78,25 +67,25 @@ const Library = ( ) => {
  
           {/* Right-side: Display filtered libraries */}
           {libraries ? (
-                <div className="library-list">
-                {libraries().map((library) => (
-                  <div key={library.id} className="library-card">
-                    <div className="card-image">
-                        {/* <img src={`../images/library${library.id}.jpg`} alt={library.name} />   {id} image */}
-                        <img src={"../icons/lib_icons.png" } alt={library.name} />  
-                    </div>
-                    <div className="card-content">
-                      <h2>{library.name}</h2>
-                      <p>{library.description}</p>
-                      <br></br>
-                      <p><strong>Author:</strong> {library.author}</p>
-                    </div>
+            <div className="library-list">
+              {libraries.map((library) => (
+                <div key={library.id} className="library-card">
+                  <div className="card-image">
+                      {/* Replace with your images */}
+                      <img src={"../icons/lib_icons.png"} alt={library.name} />  
                   </div>
-                ))}
-              </div>
-              ) : (
-                <p>Search Loading...</p>
-              )}
+                  <div className="card-content">
+                    <h2>{library.name}</h2>
+                    <p>{library.description}</p>
+                    <br />
+                    <p><strong>Author:</strong> {library.author}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>Search Loading...</p>
+          )}
         </div>
       </div>
     </Container>
