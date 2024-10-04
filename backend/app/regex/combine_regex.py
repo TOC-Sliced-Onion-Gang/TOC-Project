@@ -1,3 +1,4 @@
+import random
 import urllib
 import re
 import app.regex.pypi.shogun as sho_pypi
@@ -32,8 +33,8 @@ def get_all():
     lib_names += jw_pyorg.get()
     lib_names += firm_pyorg.get()
     lib_names += best_pyorg.get()
-    lib_names += best_pyorg.get()
     lib_names += namning_pyorg.get()
+
     lib_names = list(set(lib_names))
 
     results = []
@@ -44,7 +45,30 @@ def get_all():
     return results
 
 def search(keyword):
-    pass
+    all_regs = get_all()
+    found_libs = [lib_name for lib_name in all_regs if keyword in lib_name]
 
-def get_random():
-    pass
+    return found_libs
+
+def get_random(num):
+    rand_num = random.randint(1, 6)
+    
+    match rand_num:
+        case 1:
+            lib_names = sho_pyorg.get()
+        case 2:
+            lib_names = tung_pyorg.get()
+        case 3:
+            lib_names = jw_pyorg.get()
+        case 4:
+            lib_names = firm_pyorg.get()
+        case 5:
+            lib_names = best_pyorg.get()
+        case 6:
+            lib_names = namning_pyorg.get()
+        case _:
+            lib_names = namning_pyorg.get()
+    
+    return random.shuffle(lib_names)[:num]
+
+            
