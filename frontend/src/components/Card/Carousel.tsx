@@ -4,7 +4,6 @@ import '../CSS/CarouselStyles.css';
 interface Library {
     name: string;
     author: string;
-    libname: string;
     action: string;
     description: string;
 }

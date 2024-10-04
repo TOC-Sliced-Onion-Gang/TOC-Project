@@ -1,6 +1,4 @@
 import React from 'react';
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import PersonIcon from "@mui/icons-material/Person";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -20,8 +18,11 @@ const ResponsiveImage = styled('img')(({ theme }) => ({
   },
 }));
 
-
   const Header: React.FC = () => {
+    const handleClick = () => {
+      window.location.href = 'http://localhost:3000/';
+    };
+
     return (
       <AppBar
         color="inherit"
@@ -39,7 +40,9 @@ const ResponsiveImage = styled('img')(({ theme }) => ({
             <Typography variant="h5" noWrap component="div">
              <ResponsiveImage
                 src="../icons/pythonlib-icon.jpg" 
-                alt="Python Library Logo"              
+                alt="Python Library Logo"        
+                onClick={handleClick} // Click event to redirect to http://localhost:3000/ 
+                style={{ cursor: 'pointer' }}
               /> 
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
