@@ -23,11 +23,7 @@ def search(query: str, page: int = 1):
             
             yield {
                 'name': name and name.group(1),
-                'author': 
-                    author and {
-                        'addr': author.group(1),
-                        'name': author.group(2),
-                    },
+                'author': author.group(2),
                 'action': action and action.group(1),  
                 'description': description and description.group(),
             }
