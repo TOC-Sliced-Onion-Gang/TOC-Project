@@ -13,9 +13,6 @@ from app.regex.python_org import paul_section as paul_pyorg
 def get_detail(lib_names):
     results = []
     for module_name in lib_names:
-def get_detail(lib_names):
-    results = []
-    for module_name in lib_names:
         path ='https://docs.python.org/3/library/'+module_name+'.html' if module_name != 'lib2to3' else 'https://docs.python.org/3/library/2to3.html'
         try:
             with urllib.request.urlopen(path) as response:
@@ -58,7 +55,7 @@ def search(keyword):
     return found_libs
 
 def get_random(num):
-    rand_num = random.randint(1, 7)
+    rand_num = random.randint(1, 6)
     
     match rand_num:
         case 1:
