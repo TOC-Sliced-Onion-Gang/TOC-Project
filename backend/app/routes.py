@@ -1,5 +1,5 @@
 from flask import Blueprint, request ,jsonify
-from app.regex.combine_regex import get_all as get_all_regex, get_random, search as search_regex
+from app.regex.combine_regex import get_all as get_all_regex, get_random, search as search_regex, get_all_name
 from app.regex.pypi import shogun
 from app.regex.python_org import sho_section
 from app.regex.python_org import tung_section
@@ -32,6 +32,20 @@ def search():
     found_libs = search_regex(query)
 
     return found_libs
+
+@router.route('/csv1')
+def all_name1():
+    names = get_all_name()
+    content = '\r\n'.join(names)
+
+    return content
+
+@router.route('/csv2')
+def all_name2():
+    names = get_all_name()
+    content = ','.join(names)
+
+    return content
 
 @router.route('/pypi/search')
 def pypi_search(): 
