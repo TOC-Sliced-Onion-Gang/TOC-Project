@@ -1,0 +1,112 @@
+.result-header {
+    text-align: left;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin-bottom: 6px;
+}
+
+.section-divider {
+    margin: 5px 0;
+    height: 1.5px;
+    background-color: #d3d3d3;
+    border: none;
+    width: 20%;
+}
+
+.Allpage {
+    display: flex;
+    height: auto;
+    gap: 20px; /* Add space between the category icons and library cards */
+}
+
+.Categories {
+    width: 23%; 
+    margin: 1rem 0;
+    padding: 0px;
+}
+
+.library-categories {
+    margin-left: 34px;
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 10px;
+    background: rgb(254, 247, 255); 
+    padding: 14px;
+    color: black;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.library-categories:hover {
+    background: rgb(222, 216, 225);  
+}
+
+.library-categories.active {
+    background: rgb(222, 216, 225);
+}
+
+.library-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 20px;
+}
+
+.icon-container {
+    margin-right: 10px;
+}
+
+.icon-image {
+    width: 30px;
+    height: auto;
+}
+
+.library-card {
+    margin-top: 17px;
+    padding: 80px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 86%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.card-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; 
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.card-content {
+    flex-grow: 1;
+    margin-left: 5%;
+    text-align: left;
+}
+
+.card-content h2 {
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+}
+
+.card-content p {
+    margin: 5px 0;
+}
+
+p.large-text {
+    font-size: 18px; 
+}
+
+.text-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center; 
+    justify-content: right;
+    margin-right: 15px;
+}
