@@ -38,7 +38,7 @@ def search(user_type, get_only_lib_name=False):
     result = []
     details = []
     for url in urls :
-        for each in crawler_second_level(url):
+        for each in crawler_second_level(url): # type:ignore
             if bool(re.match(f'^{re.escape(user_type)}', each)):
                 result.append(each)
                 if not get_only_lib_name:
