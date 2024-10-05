@@ -71,7 +71,7 @@ body, html {
 
 .library-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Limit to 2 columns */
+    grid-template-columns: repeat(2, 1fr); 
     gap: 20px;
     flex-grow: 1;
     width: 100%;
@@ -87,7 +87,7 @@ body, html {
     background-color: #fff;
     padding: 20px;
     border: 1px solid #ddd;
-    border-left: 6px solid #d8bfe5;
+    border-left: 6px solid #be73e6;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s;
