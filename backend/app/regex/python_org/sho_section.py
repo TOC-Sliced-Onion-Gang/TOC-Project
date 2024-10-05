@@ -1,5 +1,6 @@
 import re
 import requests
+import functools
 
 DOMAIN = 'https://docs.python.org/3.12/library/'
 my_title = [
@@ -8,6 +9,7 @@ my_title = [
     'Python Runtime Services',
 ]
 
+@functools.cache
 def get():
     session = requests.Session()
     html = session.get(DOMAIN).text
@@ -19,8 +21,11 @@ def get():
         path = match.group(1)
         page = session.get(f'{DOMAIN}{path}').text
 
-        yield from re.findall(r'toctree-l1.*?class="pre">(.*?)<', page)
+        for lib_path in re.findall(r'toctree-l1.*?href="(.*?)"', page):
+            lib_html = session.get(f'{DOMAIN}{lib_path}').text
 
+            if re.search(r'>Source code:<strong>', lib_html):
+                name = re.search(r'<title>(\w+)', lib_html)
+                assert name
 
-if __name__ == '__main__':
-    print(*get())
+                yield name.group(1)
