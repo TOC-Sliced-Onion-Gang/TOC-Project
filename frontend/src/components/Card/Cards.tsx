@@ -5,6 +5,7 @@ interface Library {
     author: string;
     action: string;
     description: string;
+    url: string; // Ensure the url property is part of the Library interface
 }
 
 interface CardProps {
@@ -59,7 +60,13 @@ const Card: React.FC<CardProps> = ({library}) => {
                     </div>
                     <p>{library.description}</p>
                 </div>
-                <button className="expand-button">Expand</button>
+                <button 
+                    className="expand-button"
+                    onClick={handleExpandClick} // Handle the click event
+                >
+                    Source
+                </button>
+                {/* <span className="e">{library.url}</span> */}
             </div>
         </div>
     );

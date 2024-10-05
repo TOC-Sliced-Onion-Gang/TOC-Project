@@ -19,10 +19,4 @@ def get():
         path = match.group(1)
         page = requests.get(f'{DOMAIN}{path}').text
 
-        for lib_path in re.findall(r'toctree-l1.*?href="(.*?)"', page):
-            lib_html = requests.get(f'{DOMAIN}{lib_path}').text
-            
-            name = re.search(r'<title>(\w+)', lib_html)
-            assert name
-
-            yield name.group(1)
+        yield from re.findall(r'toctree-l1.*?class="pre">(.*?)<', page)
