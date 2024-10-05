@@ -45,7 +45,7 @@ def get_all():
     lib_names = list(set(lib_names))
     
     results = get_detail(lib_names)
-
+    results = results + list(set(sho_pypi.search('')))
     return results
 
 def search(keyword):
