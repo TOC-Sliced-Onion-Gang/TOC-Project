@@ -33,7 +33,7 @@ def search():
 def all_name1():
     names = get_all_name()
     content = '\r\n'.join(names)
-
+    
     return content
 
 @router.route('/csv2')
