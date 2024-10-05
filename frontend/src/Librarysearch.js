@@ -13,7 +13,7 @@ const Library = ( ) => {
   const [libraries, setLibraries] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/search?q=' + encodeURIComponent(searchTerm))
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/search?q=` + encodeURIComponent(searchTerm))
     .then((response) => response.json())
     .then((data) => {
       setLibraries(data); 

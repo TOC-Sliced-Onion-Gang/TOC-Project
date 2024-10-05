@@ -9,19 +9,18 @@ my_title = [
 ]
 
 def get():
-    html = requests.get(DOMAIN).text
+    session = requests.Session()
+    html = session.get(DOMAIN).text
 
     for title in my_title:
         match = re.search(rf'href="(.*?)">{title}', html)
         assert match
         
         path = match.group(1)
-        page = requests.get(f'{DOMAIN}{path}').text
+        page = session.get(f'{DOMAIN}{path}').text
 
-        for lib_path in re.findall(r'toctree-l1.*?href="(.*?)"', page):
-            lib_html = requests.get(f'{DOMAIN}{lib_path}').text
-            
-            name = re.search(r'<title>(\w+)', lib_html)
-            assert name
+        yield from re.findall(r'toctree-l1.*?class="pre">(.*?)<', page)
 
-            yield name.group(1)
+
+if __name__ == '__main__':
+    print(*get())
