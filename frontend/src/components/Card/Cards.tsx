@@ -12,8 +12,32 @@ interface CardProps {
     library: Library;
 }
 
-const Card: React.FC<CardProps> = ({ library }) => {
+const randomImages = [
+    "../python-lib/python-lib-1.jpg",
+    "../python-lib/python-lib-2.jpg",
+    "../python-lib/python-lib-3.jpg",
+    "../python-lib/python-lib-4.jpg",
+    "../python-lib/python-lib-5.jpg",
+    "../python-lib/python-lib-6.jpg",
+    "../python-lib/python-lib-7.jpg",
+    "../python-lib/python-lib-8.jpg",
+    "../python-lib/python-lib-9.jpg",
+    "../python-lib/python-lib-10.jpg",
+    "../python-lib/python-lib-11.jpg",
+    "../python-lib/python-lib-12.jpg",
+    "../python-lib/python-lib-13.jpg",
+    "../python-lib/python-lib-14.jpg",
+    "../python-lib/python-lib-15.jpg",
+    "../python-lib/python-lib-16.jpg",
+    "../python-lib/python-lib-17.jpg",
+];
 
+const getRandomImage = () => {
+const randomIndex = Math.floor(Math.random() * randomImages.length);
+return randomImages[randomIndex];
+};
+
+const Card: React.FC<CardProps> = ({ library }) => {
     const handleExpandClick = () => {
         if (library.url) {
             window.location.href = library.url; // Redirect to the provided URL
@@ -23,25 +47,24 @@ const Card: React.FC<CardProps> = ({ library }) => {
     };
 
     return (
-        <div className="card">
-            <div className="card-header">
-                <span className="avatar">A</span>
-                <div className="lib-info">
-                    <span className="lib-name">{library.name}</span>
-                    <span className="author">{library.author}</span>
-                </div>
-                <span className="favorite-icon">★</span>
+    <div className="card">
+        <div className="card-header">
+            <span className="avatar">{library.name[0]}</span>
+            <div className="lib-info">
+                <span className="lib-name">{library.name}</span>
+                <span className="author">{library.author ? (library.author === "-" ? "undefined" : library.author) : "No specified author"}</span>
             </div>
-            <div className="card-body">
+            <span className="favorite-icon">★</span>
+        </div>
+        <div className="card-body">
                 <div className="icon-section">
-                    {/* Placeholder for the icons you want to display */}
-                    <div className="icon-square"></div>
-                    <div className="icon-circle"></div>
-                    <div className="icon-triangle"></div>
+                    <img className="icon-image-keyword" src={getRandomImage()} alt="Random library icon" />
                 </div>
                 <div className="lib-description">
-                    <h3>This is {library.name}</h3>
-                    <p>{library.action}</p>
+                    <h3>{library.name}</h3>
+                    <div className="lib-action">
+                    <p>{library.action || 'No action available'}</p>
+                    </div>
                     <p>{library.description}</p>
                 </div>
                 <button 

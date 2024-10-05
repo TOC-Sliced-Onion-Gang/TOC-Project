@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Header from './components/Header.tsx';
 import Carousel from './components/Card/Carousel.tsx';
-import ProgressBarWithDots from './components/ProgressBar/Progressbarwithdot.tsx';
+
 import './components/CSS/Functionsection.css';
 import './components/CSS/DividerTeamgrid.css';
 import Library from './Librarysearch.js';
@@ -64,8 +64,7 @@ const App = () => {
                   <p>Carousel Loading...</p>
                 )}
               </div>
-              <ProgressBarWithDots />
-              <Typography variant="h5" component="h2" gutterBottom>
+              <Typography variant="h5" component="h2" gutterBottom style={{paddingTop:"10%"}}>
                 <div className="centered-container">
                   <div className="background-suitable">
                     <div className="find-library-heading">
