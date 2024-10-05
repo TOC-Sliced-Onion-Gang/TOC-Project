@@ -10,8 +10,7 @@ my_title = [
     'MS Windows Specific Services'
 ]
 
-@functools.cache
-def get():
+def crawl():
     session = requests.Session()
     html = session.get(DOMAIN).text
 
@@ -25,8 +24,12 @@ def get():
         for lib_path in re.findall(r'toctree-l1.*?href="(.*?)"', page):
             lib_html = session.get(f'{DOMAIN}{lib_path}').text
 
-            if re.search(r'>Source code:<strong>', lib_html):
-                name = re.search(r'<title>(\w+)', lib_html)
+            if re.search(r'<strong>Source code:</strong>', lib_html):
+                name = re.search(r'<title>([\w.]+)', lib_html)
                 assert name
 
                 yield name.group(1)
+
+@functools.cache
+def get():
+    return list(set(crawl()))
