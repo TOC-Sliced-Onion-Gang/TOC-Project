@@ -21,7 +21,7 @@ def get_detail(lib_names):
             with urllib.request.urlopen(path) as response:
                 html = response.read().decode('utf-8')
         except urllib.error.HTTPError:
-            results.append({'name':module_name, 'action':"No information provided",'description':"No description provided", "url":path})
+            results.append({'name':module_name, 'action':"No information provided",'description':"No description provided", "url":"#"})
             continue
         print(time.time()-t)
         module_name = module_name if module_name != 'lib2to3' else '2to3'
