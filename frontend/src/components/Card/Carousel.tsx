@@ -40,7 +40,7 @@ const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
         .concat(libraries.slice(0, Math.max(0, currentIndex + visibleCount - libraries.length)));
         
 return (
-    <div className="carousel-container" onWheel={handleScroll}>
+    <div className="carousel-container">
       <button className="arrow-prev arrow-left" onClick={prevSlide}>←</button>
       <div className="carousel">
         <div className="card-wrapper">
