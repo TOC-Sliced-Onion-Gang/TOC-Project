@@ -14,7 +14,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({library}) => {
     console.log(library)
     return (
-     <div className="card">
+    <div className="card">
         <div className="card-header">
             <span className="avatar">A</span>
             <div className="lib-info">
