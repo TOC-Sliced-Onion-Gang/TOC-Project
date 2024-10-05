@@ -4,7 +4,6 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import GitHubIcon from '@mui/icons-material/GitHub'; // Import GitHub Icon
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 
 // Styled components for search bar
@@ -50,10 +49,18 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate
 
+  // Function to handle search
   const handleSearch = () => {
     if (searchTerm.trim() !== '') {
       // Navigate to the Library component and pass the search term via state
       navigate('/library', { state: { search: searchTerm } });
+    }
+  };
+
+  // Function to handle Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch(); // Trigger search on Enter key press
     }
   };
 
@@ -73,6 +80,7 @@ const SearchBar = () => {
           inputProps={{ 'aria-label': 'search' }}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)} // Handle input change
+          onKeyPress={handleKeyPress} // Handle Enter key press
         />
         <Button
           variant="contained"
