@@ -1,39 +1,104 @@
-/* Divider Section */
-.section-divider {
-    margin: 50px 0;
-    height: 2px;
-    background-color: #d3d3d3;
-    border: none;
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .team-section {
-    text-align: center;
-    padding: 20px 0;
-  }
-  
+/* Team Section */
+.team-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9; /* Keep light background for contrast */
+  border-radius: 15px; /* Rounded corners for a modern look */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  font-family: 'Poppins', sans-serif; /* Change font to Poppins */
+}
+
+.team-section h4 {
+  font-size: 36px; /* Larger, bold font */
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #333; /* Darker text for readability */
+  font-family: 'Poppins', sans-serif; /* Ensure font consistency */
+}
+
+/* Team Grid - 5 items per row, 2 rows */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns per row */
+  gap: 30px;
+  justify-items: center;
+  margin-top: 50px;
+}
+
+/* Team Member */
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white; /* Keep white background for each team member */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+.team-member:hover {
+  transform: translateY(-10px); /* Lift effect on hover */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
+}
+
+/* Team Avatar */
+.team-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px; /* Spacing below the image */
+  transition: transform 0.3s ease;
+}
+
+.team-avatar:hover {
+  transform: scale(1.1);
+}
+
+/* Team Member Name */
+.team-member-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #333; 
+  margin-top: 10px;
+}
+
+/* Responsive Tweaks for smaller screens */
+@media (max-width: 1200px) {
   .team-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 50px;
-    justify-items: center;
-    margin-top: 50px;
+      grid-template-columns: repeat(3, 1fr); 
   }
-  
-  .team-member {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+      grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .team-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
+      width: 80px;
+      height: 80px;
   }
-  
-  
+
+  .team-member-name {
+      font-size: 16px;
+      font-weight: 700; 
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+      grid-template-columns: 1fr; 
+  }
+
+  .team-avatar {
+      width: 70px;
+      height: 70px;
+  }
+
+  .team-member-name {
+      font-size: 14px;
+      font-weight: 700; 
+  }
+}

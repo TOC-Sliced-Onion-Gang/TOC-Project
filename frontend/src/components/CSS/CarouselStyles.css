@@ -1,77 +1,137 @@
+/* Carousel Container */
 .carousel-container {
-    margin-top: 2.5%;;
-    margin-left: 3.5%;;
+    margin-top: 2.5%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
-    align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, #876bd1, #543290); /* Background gradient */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    width: 100vw;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 60px 0 30px;
     position: relative;
-    padding-bottom: 30px;
+    z-index: 1;
 }
 
+/* Floating Circle Animation */
+.carousel-container::before, 
+.carousel-container::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%; /* Circular shape */
+    background: rgba(255, 255, 255, 0.2); /* Light white for visibility */
+    z-index: 0; /* Behind content */
+    animation: floatMove 10s ease-in-out infinite;
+}
+
+.carousel-container::before {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    left: 250px;
+    animation-duration: 7s;
+}
+
+.carousel-container::after {
+    width: 300px;
+    height: 300px;
+    bottom: -100px;
+    right: 50px;
+    animation-duration: 10s;
+}
+
+@keyframes floatMove {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Carousel */
 .carousel {
+    width: 1600px; /* Set to fit multiple cards */
+}
+
+/* Card Wrapper */
+.card-wrapper {
     display: flex;
     justify-content: center;
+    margin-left: 6%;
+    transition: transform 0.5s ease-in-out; /* Smooth slide */
+    will-change: transform; /* Optimize animation */
 }
 
-.card-wrapper {
-    display: inline-flex;
-    gap: 90px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-}
-
+/* Card */
 .card {
+    width: 300px;
+    margin-right: 3%;
     background-color: rgb(254, 247, 255);
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    height: 410px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
     padding: 20px;
-    text-align: left;
-    font-family: sans-serif;
-    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
 }
 
 .card:hover {
-    transform: translateY(-5px);  /* Adds a lift effect on hover */
+    transform: translateY(-10px); /* Lift on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    z-index: 10;
 }
 
+/* Card Header */
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* Avatar */
 .avatar {
-    background-color:  rgb(135, 107, 209);
+    background-color: rgb(135, 107, 209);
     color: white;
     font-weight: 500;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 22px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
+/* Library Information */
 .lib-info {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    justify-content: left;
+    width: 60%;
+    margin-right: 0;
+}
+
+.lib-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
 }
 
 .author {
-    color: gray;
+    color: #666;
     font-size: 14px;
 }
 
-.favorite-icon {
-    color: #999;
-    font-size: 24px;
-    cursor: pointer;
-}
-
+/* Icon Section */
 .icon-section {
     background-color: #d3d3d3;
     height: 150px;
@@ -79,19 +139,17 @@
     justify-content: space-around;
     align-items: center;
     width: calc(100% + 40px);
-    margin-left: -20px;
-    margin-right: -20px;
+    margin: 10px -20px;
 }
 
-
 .icon-square, .icon-circle, .icon-triangle {
-    background-color: gray;
+    background-color: #aaa;
     width: 30px;
     height: 30px;
 }
 
 .icon-square {
-    background-color: #7e7e7e;
+    background-color: #6b4ba7;
 }
 
 .icon-circle {
@@ -107,105 +165,132 @@
     border-bottom: 30px solid #bdbdbd;
 }
 
-.background-suitable {
-    margin-left: 0;
-    margin-top: 4%;
-    background-color: rgb(135, 107, 209);
-    padding: 50px;
-    color: white;
-    font-size: 30px;
+.icon-image-keyword {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10%;
 }
 
-.background-padding-library {
-    margin-left: 0;
-    margin-top: 4%;
-    background-color: rgb(122, 174, 215);
-    padding: 10px;
-    color: black;
-    font-size: 30px;
-}
-
-.lib-name {
-    font-weight: bold;
-}
-
-
-.card-body {
-    margin-top: 20px;
-}
-
+/* Library Description */
 .lib-description p {
-    color: #666;
+    color: #777;
     font-size: 14px;
-    margin: 10px 0;
-    margin-top: 0; 
-    margin-bottom: 21px;
+    margin: 10px 0 15px;
+    line-height: 1.5em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5em;
 }
 
 .lib-description h3 {
-    margin-bottom: 10px; 
-    padding-bottom: 0;
+    margin-bottom: 10px;
 }
 
+/* Expand Button */
 .expand-button {
-    margin-top: -1%;
-    margin-left: 73%;
+    margin-top: auto;
+    align-self: flex-end;
     background-color: rgb(101, 85, 143);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 12px 24px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
-    align-items: right;
-    justify-content: right;
+    transition: background-color 0.3s ease;
 }
 
 .expand-button:hover {
-    background-color: #5a3ca0;
+    background-color: #4b3587;
 }
 
-.title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
+/* Arrows */
 .arrow-prev, .arrow-next {
-    margin-right: 4%;
-    color: black; /* Arrow color */
-    border: 2px solid black; /* Black border for the circle */
-    border-radius: 50%; /* Make it circular */
-    width: 50px; /* Set the size of the circle */
-    height: 45px; /* Set the size of the circle */
+    color: black;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: 20px; /* Adjust size of the arrow */
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: bold;
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    font-size: 20px;
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.arrow-prev {
+    left: 20px;
 }
 
 .arrow-next {
-    margin-left: 4%;
+    right: 20px;
 }
 
 .arrow-prev:hover, .arrow-next:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Slightly darken the background on hover */
-    border-color: black; /* Keep the border black on hover */
-    scale: 1.4;
-    transform: rotate(-15deg); 
+    background-color: rgba(0, 0, 0, 0.1); 
+    transform: translateY(-50%) scale(1.1);
 }
 
-.arrow-next:hover {
-    transform: rotate(15deg); 
+/* Progress Bar */
+.progress-bar {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 24px;
+    background-color: #f5f1fc;
+    border-radius: 12px;
+    margin: 80px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
+.progress-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(to right, #d0b3ff, #f0e7f6);
+    transform: translateY(-50%);
+    border-radius: 6px;
+}
 
+.dots-container {
+    position: absolute;
+    top: 50%;
+    left: -1.5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 15px;
+    transform: translateY(-50%);
+}
 
-.arrow-right {
-    transform: rotate(0deg); /* Default for the right arrow */
+.dot {
+    width: 14px;
+    height: 14px;
+    background-color: #9c69db;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.dot:hover {
+    transform: scale(1.2);
+}
+
+.dot.active {
+    background-color: #4a148c;
+    box-shadow: 0 6px 12px rgba(74, 20, 140, 0.4);
 }
