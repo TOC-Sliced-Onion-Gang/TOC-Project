@@ -58,7 +58,7 @@ const SearchBar = () => {
   };
 
   // Function to handle Enter key press
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearch(); // Trigger search on Enter key press
     }

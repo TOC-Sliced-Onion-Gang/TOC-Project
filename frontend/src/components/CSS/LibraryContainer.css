@@ -82,7 +82,9 @@ body, html {
 }
 
 .library-card {
-    display: flex;
+    display: grid;
+    grid-template-columns: 100px auto;
+    gap: 20px;
     align-items: center;
     background-color: #fff;
     padding: 20px;
@@ -98,12 +100,27 @@ body, html {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
-.card-image img {
+.card-image {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 10px;
     margin-right: 20px;
+    background-color: rgb(135, 107, 209);
+    color: white;
+    font-weight: 500;
+    font-size: 22px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    position: relative;
+}
+
+.letter {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    translate: -50% -50%;
+    font-weight: 600;
+    font-size: 40px;
 }
 
 .card-content {

@@ -66,7 +66,9 @@ const Library = () => {
               {libraries.map((library) => (
                 <div key={library.id} className="library-card">
                   <div className="card-image">
-                    <img src={"../icons/lib_icons.png"} alt={library.name} />
+                    <div className="letter">
+                      {library.name[0]}
+                    </div>
                   </div>
                   <div className="card-content">
                     <h2>{library.name}</h2>
