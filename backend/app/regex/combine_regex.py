@@ -8,6 +8,7 @@ from app.regex.python_org import tung_section as tung_pyorg
 from app.regex.python_org import jw_section as jw_pyorg
 from app.regex.python_org import firm_section as firm_pyorg
 from app.regex.python_org import namning_section as namning_pyorg
+from app.regex.python_org import paul_section as paul_pyorg
 
 def get_detail(lib_names):
     results = []
@@ -39,6 +40,7 @@ def get_all():
     lib_names += firm_pyorg.get()
     lib_names += best_pyorg.get()
     lib_names += namning_pyorg.get()
+    lib_names += paul_pyorg.get()
 
     lib_names = list(set(lib_names))
     
@@ -68,8 +70,8 @@ def get_random(num):
             lib_names = best_pyorg.get()
         case 6:
             lib_names = namning_pyorg.get()
-        case _:
-            lib_names = namning_pyorg.get()
+        case 7:
+            lib_names = paul_pyorg.get()
     
     lib_names = list(set(lib_names))[:num]
     random.shuffle(lib_names)
