@@ -51,14 +51,12 @@ const SearchBar = () => {
 
   // Function to handle search
   const handleSearch = () => {
-    if (searchTerm.trim() !== '') {
       // Navigate to the Library component and pass the search term via state
       navigate('/library', { state: { search: searchTerm } });
-    }
   };
 
   // Function to handle Enter key press
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearch(); // Trigger search on Enter key press
     }

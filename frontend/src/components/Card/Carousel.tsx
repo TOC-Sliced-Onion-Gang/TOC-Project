@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Card from "./Cards.tsx";
+import React, { useState } from "react";
+import Card from "./Cards";
+
 import '../CSS/CarouselStyles.css';
 
 interface Library {
