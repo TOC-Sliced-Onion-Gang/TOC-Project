@@ -41,6 +41,7 @@ const getRandomImage = () => {
 const Card: React.FC<CardProps> = ({ library, image }) => {
 
     const handleExpandClick = () => {
+        console.log(library);
         if (library.url) {
             window.location.href = library.url; // Redirect to the provided URL
         } else {

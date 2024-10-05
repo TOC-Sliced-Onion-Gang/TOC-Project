@@ -4,6 +4,7 @@ import './App.css';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Header from './components/Header.tsx';
+import LoadingButton from './components/loading.js';
 import Carousel from './components/Card/Carousel.tsx';
 
 import './components/CSS/Functionsection.css';
@@ -23,6 +24,26 @@ const teamProfiles = [
   { id: 9, image: 'https://img2.pic.in.th/pic/341172284_993013272068249_4304779115184321753_n.jpg', name: 'PAUL' },
   { id: 10, image: 'https://avatars.githubusercontent.com/u/111265617?v=4', name: 'NAMNING' },
 ];
+
+
+const handleDownloadCSV = async () => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/csv1`);
+    const csvText = await response.text();
+
+    // Create a downloadable CSV file
+    const blob = new Blob([csvText], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'All_file.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch (error) {
+    console.error('Error downloading CSV:', error);
+  }
+};
 
 const App = () => {
   const [libraries, setLibraries] = useState(null);
@@ -49,8 +70,33 @@ const App = () => {
                 {libraries ? (
                   <Carousel libraries={libraries} />
                 ) : (
-                  <div>Loading...</div>
+                  <LoadingButton loading variant="outlined">Submit
+                  </LoadingButton>
                 )}
+              </div>
+              
+              <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px', marginLeft: '30%' }}>
+                <button
+                  onClick={handleDownloadCSV}
+                  style={{
+                    padding: '12px 20px',
+                    backgroundColor: '#4b3587',
+                    color: '#fff',
+                    borderRadius: '30px',
+                    cursor: 'pointer',
+                    fontSize: '18px',
+                    fontWeight: '600',
+                    border: 'none',
+                    transition: 'background-color 0.3s ease, transform 0.2s ease',
+                    boxShadow: '0 6px 15px rgba(0, 0, 0, 0.1)',
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#543290')}
+                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#4b3587')}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = 'scale(0.95)')}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                >
+                  Download CSV
+                </button>
               </div>
               <Typography variant="h5" component="h2" gutterBottom style={{ paddingTop: "10%" }}>
                 <div className="centered-container">

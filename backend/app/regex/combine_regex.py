@@ -27,7 +27,8 @@ def get_detail(module_name):
         return {
             'name': module_name,
             'action': "No information provided",
-            'description': "No description provided"
+            'description': "No description provided",
+            'url':"#"
         }
 
     module_name = module_name if module_name != 'lib2to3' else '2to3'
@@ -41,7 +42,9 @@ def get_detail(module_name):
         'name': module_name,
         'action': action[0],
         'description': description[0],
-        'author': 'python.org'
+        'author': 'python.org',
+        'url': path
+        
     }
 
 def get_details(lib_names):
