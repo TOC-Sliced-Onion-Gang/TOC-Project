@@ -55,7 +55,7 @@ def search(keyword):
     return found_libs
 
 def get_random(num):
-    rand_num = random.randint(1, 6)
+    rand_num = random.randint(1, 7)
     
     match rand_num:
         case 1:
@@ -70,7 +70,7 @@ def get_random(num):
             lib_names = best_pyorg.get()
         case 6:
             lib_names = namning_pyorg.get()
-        case 7:
+        case _:
             lib_names = paul_pyorg.get()
     
     lib_names = list(set(lib_names))[:num]
