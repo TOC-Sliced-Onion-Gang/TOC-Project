@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import styled from 'styled-components';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Header from './components/Header.tsx';
 import Carousel from './components/Card/Carousel.tsx';
-import ProgressBarWithDots from './components/ProgressBar/Progressbarwithdot.tsx';
 import './components/CSS/Functionsection.css';
 import './components/CSS/DividerTeamgrid.css';
 import Library from './Librarysearch.js';
+
+const StatusMessage = styled.p`
+  font-family: 'Arial', sans-serif;
+  font-size: 15px;
+  color: green;
+`;
 
 // Define team profile images (mock data for profiles)
 const teamProfiles = [
@@ -49,6 +55,17 @@ const App = () => {
     .catch((error) => console.error('Error fetching data', error));
   }, [],);
 
+  const [showMessage, setShowMessage] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMessage(false);
+    }, 10000); // 10000ms = 10 seconds
+
+    // Cleanup timer if the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Router> {/* Wrap your app in the Router */}
       <Header /> 
@@ -60,7 +77,7 @@ const App = () => {
           <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '900px', width: '100%', marginLeft: '-2px' }}>
               {libraries ? (
                 <div>
-                  <p>Data fetched successfully</p>
+                   {showMessage && <StatusMessage>Data fetched successfully</StatusMessage>}
                   <ul>
 
                   </ul>
@@ -75,7 +92,6 @@ const App = () => {
                   <p>Carousel Loading...</p>
                 )}
               </div>
-              <ProgressBarWithDots />
               <Typography variant="h5" component="h2" gutterBottom>
                 <div className='background-suitable'>
                   Find Your Suitable Library here!!
