@@ -20,7 +20,7 @@ const ResponsiveImage = styled('img')(({ theme }) => ({
 
   const Header: React.FC = () => {
     const handleClick = () => {
-      window.location.href = 'http://localhost:3000/';
+      window.location.href = 'https://toc.jaychana.me/';
     };
 
     return (

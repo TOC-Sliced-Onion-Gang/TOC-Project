@@ -27,7 +27,7 @@ const teamProfiles = [
 // Define the Library interface
 // const libraries = [
 //   { id: 1, name: 'Library 1', author: 'Author 1', action: 'what lib to do 1', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-//   { id: 2, name: 'Library 2', author: 'Author 2', action: 'what lib to do 2', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
+//   { id 2, name: 'Library 2', author: 'Author 2', action: 'what lib to do 2', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
 //   { id: 3, name: 'Library 3', author: 'Author 3', action: 'what lib to do 3', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
 //   { id: 4, name: 'Library 4', author: 'Author 4', action: 'what lib to do 4', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
 //   { id: 5, name: 'Library 5', author: 'Author 5', action: 'what lib to do 5', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
@@ -39,7 +39,7 @@ const App = () => {
   const [libraries, setLibraries] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/random')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/random`)
     .then((response) => response.json())
     .then((data) => {
       setLibraries(data); 
