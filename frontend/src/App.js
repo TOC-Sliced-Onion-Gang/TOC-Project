@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Header from './components/Header.tsx';
 import LoadingButton from './components/loading.js';
 import Carousel from './components/Card/Carousel.tsx';
-
 import './components/CSS/Functionsection.css';
 import './components/CSS/DividerTeamgrid.css';
 import Library from './Librarysearch.js';
@@ -24,7 +23,6 @@ const teamProfiles = [
   { id: 9, image: 'https://img2.pic.in.th/pic/341172284_993013272068249_4304779115184321753_n.jpg', name: 'PAUL' },
   { id: 10, image: 'https://avatars.githubusercontent.com/u/111265617?v=4', name: 'NAMNING' },
 ];
-
 
 const handleDownloadCSV = async () => {
   try {
@@ -45,6 +43,43 @@ const handleDownloadCSV = async () => {
   }
 };
 
+
+const SeeAllLibrariesButton = ({ libraries }) => {
+  const navigate = useNavigate();
+
+  const handleSeeAllLibraries = () => {
+    navigate('/library', { state: { search: "*" } });
+  };
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px' }}>
+      <button
+        onClick={handleSeeAllLibraries}
+        style={{
+          padding: '12px 20px',
+          width: '200px',
+          backgroundColor: '#fff',
+          color: '#4b3587',
+          borderRadius: '30px',
+          cursor: 'pointer',
+          fontSize: '18px',
+          fontWeight: '600',
+          border: 'none',
+          transition: 'background-color 0.3s ease, transform 0.2s ease',
+          boxShadow: '0 6px 15px rgba(0, 0, 0, 0.1)',
+        }}
+        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#ddd')}
+        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#fff')}
+        onMouseDown={(e) => (e.currentTarget.style.transform = 'scale(0.95)')}
+        onMouseUp={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+      >
+        See All Libraries
+      </button>
+    </div>
+  );
+};
+
+
 const App = () => {
   const [libraries, setLibraries] = useState(null);
 
@@ -55,13 +90,12 @@ const App = () => {
         setLibraries(data);
       })
       .catch((error) => console.error('Error fetching data', error));
-  }, [],);
+  }, []);
 
   return (
-    <Router> {/* Wrap your app in the Router */}
+    <Router>
       <Header />
       <Routes>
-        {/* Define the route for the home page */}
         <Route
           path="/"
           element={
@@ -70,33 +104,36 @@ const App = () => {
                 {libraries ? (
                   <Carousel libraries={libraries} />
                 ) : (
-                  <LoadingButton loading variant="outlined">Submit
-                  </LoadingButton>
+                  <LoadingButton loading variant="outlined">Submit</LoadingButton>
                 )}
               </div>
-              
-              <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px', marginLeft: '30%' }}>
-                <button
-                  onClick={handleDownloadCSV}
-                  style={{
-                    padding: '12px 20px',
-                    backgroundColor: '#4b3587',
-                    color: '#fff',
-                    borderRadius: '30px',
-                    cursor: 'pointer',
-                    fontSize: '18px',
-                    fontWeight: '600',
-                    border: 'none',
-                    transition: 'background-color 0.3s ease, transform 0.2s ease',
-                    boxShadow: '0 6px 15px rgba(0, 0, 0, 0.1)',
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#543290')}
-                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#4b3587')}
-                  onMouseDown={(e) => (e.currentTarget.style.transform = 'scale(0.95)')}
-                  onMouseUp={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                >
-                  Download CSV
-                </button>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '30px' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px' }}>
+                  <button
+                    onClick={handleDownloadCSV}
+                    style={{
+                      padding: '12px 20px',
+                      width: '200px',
+                      backgroundColor: '#4b3587',
+                      color: '#fff',
+                      borderRadius: '30px',
+                      cursor: 'pointer',
+                      fontSize: '18px',
+                      fontWeight: '600',
+                      border: 'none',
+                      transition: 'background-color 0.3s ease, transform 0.2s ease',
+                      boxShadow: '0 6px 15px rgba(0, 0, 0, 0.1)',
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#543290')}
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#4b3587')}
+                    onMouseDown={(e) => (e.currentTarget.style.transform = 'scale(0.95)')}
+                    onMouseUp={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    Download CSV
+                  </button>
+                </div>
+                {/* Include the SeeAllLibrariesButton component */}
+                <SeeAllLibrariesButton />
               </div>
               <Typography variant="h5" component="h2" gutterBottom style={{ paddingTop: "10%" }}>
                 <div className="centered-container">
@@ -110,18 +147,9 @@ const App = () => {
                   </div>
                 </div>
               </Typography>
-
-              {/* Team Profiles Section */}
               {/* Team Profiles Section */}
               <section className="team-section">
-                <Typography
-                  textAlign="center"
-                  margin="40px 0"
-                  variant="h4"
-                  component="h3"
-                  gutterBottom
-                  className="team-heading"
-                >
+                <Typography textAlign="center" margin="40px 0" variant="h4" component="h3" gutterBottom className="team-heading">
                   Meet Our Team
                 </Typography>
                 <div className="team-grid">
@@ -135,23 +163,13 @@ const App = () => {
                   ))}
                 </div>
               </section>
-
             </Container>
           }
         />
-        {/* Define the route for the /library page */}
-        <Route path="/library"
-          element={
-            libraries ? (
-              <Library />
-            ) : (
-              <p>Loading...</p>
-            )
-          }
-        />
+        <Route path="/library" element={libraries ? <Library /> : <p>Loading...</p>} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

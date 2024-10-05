@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import SearchBar from './Input/Searchbar.tsx';
+import SearchBar from './Input/Searchbar';
 import IconButton from '@mui/material/IconButton';
 import GitHubIcon from '@mui/icons-material/GitHub'; // Import GitHub Icon
 import { styled } from '@mui/material/styles';
