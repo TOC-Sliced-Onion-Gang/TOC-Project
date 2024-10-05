@@ -43,12 +43,12 @@ const handleDownloadCSV = async () => {
   }
 };
 
-// This component handles "See All Libraries" button navigation
-const SeeAllLibrariesButton = () => {
+
+const SeeAllLibrariesButton = ({ libraries }) => {
   const navigate = useNavigate();
 
   const handleSeeAllLibraries = () => {
-    navigate('/libraries');
+    navigate('/library', { state: { search: "*" } });
   };
 
   return (
@@ -78,6 +78,7 @@ const SeeAllLibrariesButton = () => {
     </div>
   );
 };
+
 
 const App = () => {
   const [libraries, setLibraries] = useState(null);

@@ -51,10 +51,8 @@ const SearchBar = () => {
 
   // Function to handle search
   const handleSearch = () => {
-    if (searchTerm.trim() !== '') {
       // Navigate to the Library component and pass the search term via state
       navigate('/library', { state: { search: searchTerm } });
-    }
   };
 
   // Function to handle Enter key press

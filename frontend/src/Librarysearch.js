@@ -6,24 +6,29 @@ import './components/CSS/LibraryContainer.css';
 
 const Library = () => {
   const location = useLocation();
-  const searchTerm = location.state?.search || '';
+  const searchTerm = location.state?.search || '';  // For search-based navigation
+  const initialLibraries = location.state?.libraries || null; // Libraries passed via state
   const [activeItem, setActiveItem] = useState('all');
-  const [libraries, setLibraries] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [libraries, setLibraries] = useState(initialLibraries); // Initialize with passed libraries
+  const [loading, setLoading] = useState(!initialLibraries); // Set loading only if no libraries passed
 
   useEffect(() => {
-    setLoading(true); 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/search?q=` + encodeURIComponent(searchTerm))
-      .then((response) => response.json())
-      .then((data) => {
-        setLibraries(data);
-        setLoading(false); 
-      })
-      .catch((error) => {
-        console.error('Error fetching data', error);
-        setLoading(false); 
-      });
-  }, [searchTerm]);
+    if (!initialLibraries) {
+      // Perform search only if no libraries were passed in state
+      setLoading(true);
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/search?q=` + encodeURIComponent(searchTerm))
+        .then((response) => response.json())
+        .then((data) => {
+          setLibraries(data);
+          setLoading(false);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data', error);
+          setLoading(false);
+        });
+    }
+  }, [searchTerm, initialLibraries]);
 
   const handleItemClick = (item) => {
     setActiveItem(item);
@@ -40,7 +45,7 @@ const Library = () => {
         <Container maxWidth={false} style={{ marginLeft: '35px', paddingLeft: '1rem' }}>
           <div className="result-header-container">
             <h4 className='result-header'>
-              Search Results: {searchTerm ? `"${searchTerm}"` : ''}
+              {searchTerm ? `Search Results: "${searchTerm}"` : 'All Libraries'}
             </h4>
           </div>
           <hr className="section-divider" />
@@ -61,7 +66,7 @@ const Library = () => {
 
           {loading ? ( // Conditional rendering based on loading state
             <div className="loading-spinner">Loading...</div>
-          ) : libraries ? (
+          ) : libraries && libraries.length > 0 ? (
             <div className="library-list">
               {libraries.map((library) => (
                 <div key={library.id} className="library-card">

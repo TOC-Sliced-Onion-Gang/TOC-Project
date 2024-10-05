@@ -25,6 +25,8 @@ def random():
 @router.route('/search')
 def search():
     query = request.args.get('q') or ''
+    if not query or query == "*":
+        return get_all_regex()
     limit = int(request.args.get('limit') or 14)
 
     return search_regex(query, limit)
