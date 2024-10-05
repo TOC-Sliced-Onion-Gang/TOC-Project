@@ -33,22 +33,31 @@ def crawler_second_level(url):
             output = list(set(output))
             return output
     
-def search(user_type):
+def search(user_type, get_only_lib_name=False):
     urls = crawler_first_level()
     result = []
     details = []
     for url in urls :
         for each in crawler_second_level(url):
-            if bool(re.match(f'^{re.escape(user_type)}', each)): 
+            if bool(re.match(f'^{re.escape(user_type)}', each)):
                 result.append(each)
-                details.append(get_detail(each))
-    return {result[i]:details[i] for i in range(len(result))}
+                if not get_only_lib_name:
+                    details.append(get_detail(each))
+    
+    if not get_only_lib_name:
+        return {result[i]:details[i] for i in range(len(result))}
+    else:
+        return result
 
 def get_detail(module_name):
     html = None
     path ='https://docs.python.org/3/library/'+module_name+'.html' if module_name != 'lib2to3' else 'https://docs.python.org/3/library/2to3.html'
     with urllib.request.urlopen(path) as response:
         html = response.read().decode('utf-8')
-    action = re.findall(f'<meta property="og:title" content="{module_name if module_name != 'lib2to3' else '2to3'} — (.+?)"', html)
+    module_name = module_name if module_name != 'lib2to3' else '2to3'
+    action = re.findall(f'<meta property="og:title" content="{module_name} — (.+?)"', html)
     description = re.findall(r'<meta property="og:description" content="(.+?)"', html)
     return {'action':action[0],'description':description[0]}
+
+def get():
+    return search('', True)
