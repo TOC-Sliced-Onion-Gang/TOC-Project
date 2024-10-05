@@ -58,7 +58,8 @@
 .lib-info {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    justify-content: left;
+    margin-right: 30%;
 }
 
 .author {
