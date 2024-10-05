@@ -1,11 +1,6 @@
-from flask import Blueprint, request ,jsonify
+from flask import Blueprint, request
 from app.regex.combine_regex import get_all as get_all_regex, get_random, search as search_regex, get_all_name
 from app.regex.pypi import shogun
-from app.regex.python_org import sho_section
-from app.regex.python_org import tung_section
-from app.regex.python_org import firm_section
-from app.regex.python_org import jw_section
-from app.regex.python_org.namning_section import search as nornor
 
 router = Blueprint('router', __name__)
 
@@ -42,10 +37,44 @@ def all_name1():
 
 @router.route('/csv2')
 def all_name2():
+    delimiter = request.args.get('d') or ','
     names = get_all_name()
-    content = ','.join(names)
+    content = delimiter.join(names)
 
     return content
+
+# for testing
+@router.route('/list')
+def list_name():
+    from itertools import chain
+    from app.regex.python_org import (
+        sho_section, 
+        tung_section, 
+        jw_section, 
+        firm_section, 
+        namning_section, 
+        paul_section, 
+        ink_section, 
+        best_section,
+    )
+    
+    all_n = {
+        'sho': list(sho_section.get()),
+        'tung': list(tung_section.get()),
+        'firm': list(firm_section.get()),
+        'jw': list(jw_section.get()),
+        'namning': list(namning_section.get()),
+        'paul': list(paul_section.get()),
+        'ink': list(ink_section.get()),
+        'best': list(best_section.get())
+    }
+    lenmap = map(len, all_n.values())
+    print(sum(lenmap))
+    
+    unique = set(chain.from_iterable(all_n.values()))
+    print(len(unique))
+    
+    return all_n
 
 @router.route('/pypi/search')
 def pypi_search(): 
