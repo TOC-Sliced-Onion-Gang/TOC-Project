@@ -57,7 +57,6 @@ const Card: React.FC<CardProps> = ({ library, image }) => {
                 <span className="lib-name">{library.name}</span>
                 <span className="author">{library.author ? (library.author === "-" ? "undefined" : library.author) : "No specified author"}</span>
             </div>
-            <span className="favorite-icon">★</span>
         </div>
         <div className="card-body">
                 <div className="icon-section">
