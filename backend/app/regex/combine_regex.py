@@ -1,9 +1,9 @@
 import random
 import urllib
 import re
-import time
 import functools
 from rapidfuzz.process import extract
+from rapidfuzz.fuzz import partial_ratio
 import app.regex.pypi.shogun as sho_pypi
 from app.regex.python_org import (
     sho_section as sho_pyorg,
@@ -74,7 +74,7 @@ def get_all():
 
 def search(keyword, limit):
     all_regs = get_all_name()
-    filterd = extract(keyword, all_regs, limit=limit)
+    filterd = extract(keyword, all_regs, limit=limit, scorer=partial_ratio, score_cutoff=60)
     found_libs = [name for name, *_ in filterd]
 
     return get_details(found_libs)
