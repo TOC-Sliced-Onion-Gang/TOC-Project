@@ -1,112 +1,160 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.background {
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.result-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
 .result-header {
-    text-align: left;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    margin-bottom: 6px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #444;
 }
 
 .section-divider {
-    margin: 5px 0;
-    height: 1.5px;
-    background-color: #d3d3d3;
-    border: none;
-    width: 20%;
+    margin: 0; 
+    height: 2px; 
+    background-color: #dcdcdc; 
+    border: none; 
+    width: 100%; 
 }
 
 .Allpage {
     display: flex;
-    height: auto;
-    gap: 20px; /* Add space between the category icons and library cards */
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
 }
 
 .Categories {
-    width: 23%; 
+    width: 20%;
     margin: 1rem 0;
-    padding: 0px;
+    padding: 0;
 }
 
 .library-categories {
-    margin-left: 34px;
     display: flex;
     align-items: center;
-    width: 60%;
+    padding: 14px 20px;
     margin-bottom: 10px;
-    background: rgb(254, 247, 255); 
-    padding: 14px;
-    color: black;
-    border-radius: 10px;
-    font-size: 15px;
+    background-color: #eee;
+    color: #555;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
+    border-left: 6px solid #d8bfe5;
 }
 
 .library-categories:hover {
-    background: rgb(222, 216, 225);  
+    background-color: #f1e8f7;
+    transform: scale(1.05);
 }
 
 .library-categories.active {
-    background: rgb(222, 216, 225);
+    background-color: #f1e8f7;
+    color: #5a3f85;
 }
 
 .library-list {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Limit to 2 columns */
     gap: 20px;
+    flex-grow: 1;
+    width: 100%;
 }
 
 .icon-container {
     margin-right: 10px;
 }
 
-.icon-image {
-    width: 30px;
-    height: auto;
+.library-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-left: 6px solid #d8bfe5;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s;
 }
 
-.library-card {
-    margin-top: 17px;
-    padding: 80px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 86%;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.library-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
 .card-image img {
     width: 100px;
     height: 100px;
-    object-fit: cover; 
+    object-fit: cover;
+    border-radius: 10px;
     margin-right: 20px;
-    border-radius: 5px;
 }
 
 .card-content {
     flex-grow: 1;
-    margin-left: 5%;
-    text-align: left;
 }
 
 .card-content h2 {
     font-size: 1.5rem;
-    margin: 0 0 10px 0;
+    margin-bottom: 5px;
+    color: #333;
 }
 
 .card-content p {
     margin: 5px 0;
+    color: #666;
 }
 
-p.large-text {
-    font-size: 18px; 
+.large-text {
+    font-size: 18px;
+    color: #555;
 }
 
-.text-container {
-    flex-grow: 1;
+.loading-spinner {
     display: flex;
-    align-items: center; 
-    justify-content: right;
-    margin-right: 15px;
+    align-items: center;
+    justify-content: center;
+    height: 100px; 
+}
+
+@media (max-width: 768px) {
+    .Allpage {
+        flex-direction: column;
+    }
+
+    .Categories {
+        width: 100%;
+    }
+
+    .library-list {
+        grid-template-columns: 1fr; 
+        width: 100%;
+    }
+
+    .result-header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .library-list {
+        grid-template-columns: repeat(2, 1fr); 
+    }
 }

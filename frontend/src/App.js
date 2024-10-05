@@ -4,129 +4,150 @@ import './App.css';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Header from './components/Header.tsx';
+import LoadingButton from './components/loading.js';
 import Carousel from './components/Card/Carousel.tsx';
-import ProgressBarWithDots from './components/ProgressBar/Progressbarwithdot.tsx';
+
 import './components/CSS/Functionsection.css';
 import './components/CSS/DividerTeamgrid.css';
 import Library from './Librarysearch.js';
 
 // Define team profile images (mock data for profiles)
 const teamProfiles = [
-  { id: 1, image: 'https://img2.pic.in.th/pic/315988909_1282333705674331_9115844950659140267_n.jpg', name: 'Member 1' },
-  { id: 2, image: 'https://img5.pic.in.th/file/secure-sv1/Neosepien.jpg', name: 'Member 2' },
-  { id: 3, image: 'https://avatars.githubusercontent.com/u/107759970?v=4', name: 'Member 3' },
-  { id: 4, image: 'https://img5.pic.in.th/file/secure-sv1/415044131_890083446046210_1882306361796690282_n.jpg', name: 'Member 4' },
-  { id: 5, image: 'https://img2.pic.in.th/pic/322601440_1338586560308758_5294750078237432784_n.jpg', name: 'Member 5' },
-  { id: 6, image: 'https://img2.pic.in.th/pic/320638780_1194149611211528_6331848456637020179_n.jpg', name: 'Member 6' },
-  { id: 7, image: 'https://img5.pic.in.th/file/secure-sv1/317845266_3336517379930572_8550486041413080322_n.jpg', name: 'Member 7' },
-  { id: 8, image: 'https://img5.pic.in.th/file/secure-sv1/442439867_2234784990197492_200083161153342259_n.jpg', name: 'Member 8' },
-  { id: 9, image: 'https://img2.pic.in.th/pic/341172284_993013272068249_4304779115184321753_n.jpg', name: 'Member 9' },
-  { id: 10, image: 'https://avatars.githubusercontent.com/u/111265617?v=4', name: 'Member 10' },
+  { id: 1, image: 'https://img2.pic.in.th/pic/315988909_1282333705674331_9115844950659140267_n.jpg', name: 'BLUE' },
+  { id: 2, image: 'https://img5.pic.in.th/file/secure-sv1/Neosepien.jpg', name: 'SHOGUN' },
+  { id: 3, image: 'https://avatars.githubusercontent.com/u/107759970?v=4', name: 'JAY' },
+  { id: 4, image: 'https://img5.pic.in.th/file/secure-sv1/415044131_890083446046210_1882306361796690282_n.jpg', name: 'BEST' },
+  { id: 5, image: 'https://img2.pic.in.th/pic/322601440_1338586560308758_5294750078237432784_n.jpg', name: 'INK' },
+  { id: 6, image: 'https://img2.pic.in.th/pic/320638780_1194149611211528_6331848456637020179_n.jpg', name: 'TUNG' },
+  { id: 7, image: 'https://img5.pic.in.th/file/secure-sv1/317845266_3336517379930572_8550486041413080322_n.jpg', name: 'JIWA' },
+  { id: 8, image: 'https://img5.pic.in.th/file/secure-sv1/442439867_2234784990197492_200083161153342259_n.jpg', name: 'FERM' },
+  { id: 9, image: 'https://img2.pic.in.th/pic/341172284_993013272068249_4304779115184321753_n.jpg', name: 'PAUL' },
+  { id: 10, image: 'https://avatars.githubusercontent.com/u/111265617?v=4', name: 'NAMNING' },
 ];
 
-// Define the Library interface
-// const libraries = [
-//   { id: 1, name: 'Library 1', author: 'Author 1', action: 'what lib to do 1', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-//   { id 2, name: 'Library 2', author: 'Author 2', action: 'what lib to do 2', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-//   { id: 3, name: 'Library 3', author: 'Author 3', action: 'what lib to do 3', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-//   { id: 4, name: 'Library 4', author: 'Author 4', action: 'what lib to do 4', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-//   { id: 5, name: 'Library 5', author: 'Author 5', action: 'what lib to do 5', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-//   { id: 6, name: 'Library 6', author: 'Author 6', action: 'what lib to do 6', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio libero quaerat sequi minima laudantium exercitationem ut molestias culpa repudiandae magni' },
-// ];
 
+const handleDownloadCSV = async () => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/csv1`);
+    const csvText = await response.text();
+
+    // Create a downloadable CSV file
+    const blob = new Blob([csvText], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'All_file.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch (error) {
+    console.error('Error downloading CSV:', error);
+  }
+};
 
 const App = () => {
   const [libraries, setLibraries] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/random`)
-    .then((response) => response.json())
-    .then((data) => {
-      setLibraries(data); 
-      console.log(libraries);
-      console.log(data);
-    })
-    .catch((error) => console.error('Error fetching data', error));
+      .then((response) => response.json())
+      .then((data) => {
+        setLibraries(data);
+      })
+      .catch((error) => console.error('Error fetching data', error));
   }, [],);
 
   return (
     <Router> {/* Wrap your app in the Router */}
-      <Header /> 
+      <Header />
       <Routes>
         {/* Define the route for the home page */}
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
-          <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '900px', width: '100%', marginLeft: '-2px' }}>
-              {libraries ? (
-                <div>
-                  <p>Data fetched successfully</p>
-                  <ul>
-
-                  </ul>
-                </div>
-              ) : (
-                <p>Loading...</p>
-              )}
+            <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '100px', width: '100%', marginLeft: '-2px' }}>
               <div className="carousel-section">
                 {libraries ? (
                   <Carousel libraries={libraries} />
                 ) : (
-                  <p>Carousel Loading...</p>
+                  <LoadingButton loading variant="outlined">Submit
+                  </LoadingButton>
                 )}
               </div>
-              <ProgressBarWithDots />
-              <Typography variant="h5" component="h2" gutterBottom>
-                <div className='background-suitable'>
-                  Find Your Suitable Library here!!
+              
+              <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px', marginLeft: '30%' }}>
+                <button
+                  onClick={handleDownloadCSV}
+                  style={{
+                    padding: '12px 20px',
+                    backgroundColor: '#4b3587',
+                    color: '#fff',
+                    borderRadius: '30px',
+                    cursor: 'pointer',
+                    fontSize: '18px',
+                    fontWeight: '600',
+                    border: 'none',
+                    transition: 'background-color 0.3s ease, transform 0.2s ease',
+                    boxShadow: '0 6px 15px rgba(0, 0, 0, 0.1)',
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#543290')}
+                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#4b3587')}
+                  onMouseDown={(e) => (e.currentTarget.style.transform = 'scale(0.95)')}
+                  onMouseUp={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                >
+                  Download CSV
+                </button>
+              </div>
+              <Typography variant="h5" component="h2" gutterBottom style={{ paddingTop: "10%" }}>
+                <div className="centered-container">
+                  <div className="background-suitable">
+                    <div className="find-library-heading">
+                      Find Your Suitable Library Here!
+                    </div>
+                    <div className="find-library-subtext">
+                      Discover the perfect library tailored to your needs. Whether you're looking for a specific author, topic, or action, our search function will help you find it effortlessly.
+                    </div>
+                  </div>
                 </div>
               </Typography>
 
-              {/* Section with shadowed text and image */}
-              <section className="shadow-section">
-                <Typography variant="h4" component="h2" className="shadow-text" gutterBottom>
-                  How our search function works?
-                </Typography>
-
-                <div className="image-section">
-                  <img src="../icons/function-works.jpg" alt="How our search works" className="section-image" />
-                </div>
-
-                <Typography marginTop="100px" marginBottom="200px" variant="body1" component="p" className="section-description">
-                  {``}
-                </Typography>
-              </section>
-
-              {/* Divider Section */}
-              <hr className="section-divider" />
-
+              {/* Team Profiles Section */}
               {/* Team Profiles Section */}
               <section className="team-section">
-                <Typography textAlign="left" marginLeft="100px" variant="h4" component="h3" gutterBottom>
-                  Teams
+                <Typography
+                  textAlign="center"
+                  margin="40px 0"
+                  variant="h4"
+                  component="h3"
+                  gutterBottom
+                  className="team-heading"
+                >
+                  Meet Our Team
                 </Typography>
                 <div className="team-grid">
                   {teamProfiles.map((profile) => (
                     <div key={profile.id} className="team-member">
                       <img src={profile.image} alt={profile.name} className="team-avatar" />
+                      <Typography variant="body1" className="team-member-name">
+                        {profile.name}
+                      </Typography>
                     </div>
                   ))}
                 </div>
               </section>
-              
+
             </Container>
-          } 
+          }
         />
         {/* Define the route for the /library page */}
-        {/* <Route path="/library" element={<Library />} /> */}
         <Route path="/library"
-           element={
+          element={
             libraries ? (
-           <Library />
+              <Library />
             ) : (
               <p>Loading...</p>
             )
-           }
+          }
         />
       </Routes>
     </Router>
@@ -134,16 +155,3 @@ const App = () => {
 }
 
 export default App;
-// import React from 'react';
-// import PolarChart from './PolarChart.tsx'; // Adjust the path based on your file structure
-
-// const App = () => {
-//   return (
-//     <div>
-//       <h1>My Charts</h1>
-//       <PolarChart />
-//     </div>
-//   );
-// };
-
-
