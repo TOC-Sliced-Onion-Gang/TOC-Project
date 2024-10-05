@@ -2,7 +2,7 @@ __pycache__/
 flask
 
 ##Frontend
-package-lock.json
+/frontend/package-lock.json
 node_modules
 .pnp
 .pnp.js
