@@ -18,9 +18,9 @@ def get_detail(lib_names):
         t = time.time()
         path ='https://docs.python.org/3/library/'+module_name+'.html' if module_name != 'lib2to3' else 'https://docs.python.org/3/library/2to3.html'
         try:
-            with urllib.request.urlopen(path) as response:
+            with urllib.request.urlopen(path) as response: # type:ignore
                 html = response.read().decode('utf-8')
-        except urllib.error.HTTPError:
+        except urllib.error.HTTPError: # type:ignore
             results.append({'name':module_name, 'action':"No information provided",'description':"No description provided"})
             continue
         print(time.time()-t)
