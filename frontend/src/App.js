@@ -39,7 +39,7 @@ const App = () => {
   const [libraries, setLibraries] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/random')
+    fetch('http://127.0.0.1:5000/random')
     .then((response) => response.json())
     .then((data) => {
       setLibraries(data); 
@@ -57,7 +57,7 @@ const App = () => {
         <Route 
           path="/" 
           element={
-          <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '900px', width: '100%', marginLeft: '-2px' }}>
+          <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '100px', width: '100%', marginLeft: '-2px' }}>
               {libraries ? (
                 <div>
                   <p>Data fetched successfully</p>
@@ -77,10 +77,17 @@ const App = () => {
               </div>
               <ProgressBarWithDots />
               <Typography variant="h5" component="h2" gutterBottom>
-                <div className='background-suitable'>
-                  Find Your Suitable Library here!!
-                </div>
-              </Typography>
+  <div className="centered-container">
+    <div className="background-suitable">
+      <div className="find-library-heading">
+        Find Your Suitable Library Here!
+      </div>
+      <div className="find-library-subtext">
+        Discover the perfect library tailored to your needs. Whether you're looking for a specific author, topic, or action, our search function will help you find it effortlessly.
+      </div>
+    </div>
+  </div>
+</Typography>
 
               {/* Section with shadowed text and image */}
               <section className="shadow-section">

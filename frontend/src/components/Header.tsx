@@ -20,7 +20,7 @@ const ResponsiveImage = styled('img')(({ theme }) => ({
 
   const Header: React.FC = () => {
     const handleClick = () => {
-      window.location.href = 'http://localhost:3000/';
+      window.location.href = 'http://127.0.0.1:3000/';
     };
 
     return (
@@ -38,7 +38,7 @@ const ResponsiveImage = styled('img')(({ theme }) => ({
         <Container maxWidth={false} sx={{ maxWidth: '2500px' }}>
           <Toolbar>
             <Typography variant="h5" noWrap component="div">
-             <ResponsiveImage
+            <ResponsiveImage
                 src="../icons/pythonlib-icon.jpg" 
                 alt="Python Library Logo"        
                 onClick={handleClick} // Click event to redirect to http://localhost:3000/ 
