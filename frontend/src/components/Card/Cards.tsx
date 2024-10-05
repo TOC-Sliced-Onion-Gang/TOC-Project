@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface Library {
     name: string;
@@ -10,6 +10,7 @@ interface Library {
 
 interface CardProps {
     library: Library;
+    image: string;
 }
 
 const randomImages = [
@@ -33,11 +34,12 @@ const randomImages = [
 ];
 
 const getRandomImage = () => {
-const randomIndex = Math.floor(Math.random() * randomImages.length);
-return randomImages[randomIndex];
+    const randomIndex = Math.floor(Math.random() * randomImages.length);
+    return randomImages[randomIndex];
 };
 
-const Card: React.FC<CardProps> = ({ library }) => {
+const Card: React.FC<CardProps> = ({ library, image }) => {
+
     const handleExpandClick = () => {
         if (library.url) {
             window.location.href = library.url; // Redirect to the provided URL
@@ -58,7 +60,8 @@ const Card: React.FC<CardProps> = ({ library }) => {
         </div>
         <div className="card-body">
                 <div className="icon-section">
-                    <img className="icon-image-keyword" src={getRandomImage()} alt="Random library icon" />
+                    {/* <img className="icon-image-keyword" src={getRandomImage()} alt="Random library icon" /> */}
+                    <img className="icon-image-keyword" src={image} alt="Random library icon" />
                 </div>
                 <div className="lib-description">
                     <h3>{library.name}</h3>

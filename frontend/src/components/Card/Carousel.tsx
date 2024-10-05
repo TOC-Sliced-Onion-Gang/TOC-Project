@@ -15,7 +15,29 @@ interface CarouselProps {
     libraries: Library[];
 }
 
+const randomImages = [
+    "../python-lib/python-lib-1.jpg",
+    "../python-lib/python-lib-2.jpg",
+    "../python-lib/python-lib-3.jpg",
+    "../python-lib/python-lib-4.jpg",
+    "../python-lib/python-lib-5.jpg",
+    "../python-lib/python-lib-6.jpg",
+    "../python-lib/python-lib-7.jpg",
+    "../python-lib/python-lib-8.jpg",
+    "../python-lib/python-lib-9.jpg",
+    "../python-lib/python-lib-10.jpg",
+    "../python-lib/python-lib-11.jpg",
+    "../python-lib/python-lib-12.jpg",
+    "../python-lib/python-lib-13.jpg",
+    "../python-lib/python-lib-14.jpg",
+    "../python-lib/python-lib-15.jpg",
+    "../python-lib/python-lib-16.jpg",
+    "../python-lib/python-lib-17.jpg",
+];
+
 const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
+    randomImages.sort(() => Math.random() - 0.5);
+
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const visibleCount = 3; // Show 3 cards at a time
     const totalDots = Math.ceil(libraries.length / visibleCount); // Total number of dot indicators
@@ -45,17 +67,17 @@ const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
 
     return (
       <div className="carousel-container">
+        <button className="arrow-prev arrow-left" onClick={prevSlide}>←</button>
+        <button className="arrow-next arrow-right" onClick={nextSlide}>→</button>
+
         <div className="carousel-slide">
             <div className="carousel">
                 <div className="card-wrapper">
                     {visibleLibraries.map((library, index) => (
-                        <Card key={index} library={library} />
+                        <Card image={randomImages[index]} key={index} library={library} />
                     ))}
                 </div>
             </div>
-            <button className="arrow-prev arrow-left" onClick={prevSlide}>←</button>
-            <button className="arrow-next arrow-right" onClick={nextSlide}>→</button>
-
             {/* Progress Bar */}
             <div className="progress-bar">
                 <div className="progress-track"></div>
@@ -64,7 +86,7 @@ const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
                         <div
                             key={dotIndex}
                             className={`dot ${dotIndex === Math.floor(currentIndex / visibleCount) ? 'active' : ''}`}
-                            onMouseEnter={() => handleDotHover(dotIndex)} // Hovering over the dot will preview that set
+                            // onMouseEnter={() => handleDotHover(dotIndex)} // Hovering over the dot will preview that set
                             onClick={() => handleDotClick(dotIndex)} // Clicking will navigate to that set
                         />
                     ))}

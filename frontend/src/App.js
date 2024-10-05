@@ -29,42 +29,30 @@ const App = () => {
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/random`)
-    .then((response) => response.json())
-    .then((data) => {
-      setLibraries(data); 
-      console.log(libraries);
-      console.log(data);
-    })
-    .catch((error) => console.error('Error fetching data', error));
+      .then((response) => response.json())
+      .then((data) => {
+        setLibraries(data);
+      })
+      .catch((error) => console.error('Error fetching data', error));
   }, [],);
 
   return (
     <Router> {/* Wrap your app in the Router */}
-      <Header /> 
+      <Header />
       <Routes>
         {/* Define the route for the home page */}
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
-          <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '100px', width: '100%', marginLeft: '-2px' }}>
-              {libraries ? (
-                <div>
-                  <p>Data fetched successfully</p>
-                  <ul>
-
-                  </ul>
-                </div>
-              ) : (
-                <p>Loading...</p>
-              )}
+            <Container maxWidth={false} disableGutters className="App" style={{ paddingTop: '100px', paddingBottom: '100px', width: '100%', marginLeft: '-2px' }}>
               <div className="carousel-section">
                 {libraries ? (
                   <Carousel libraries={libraries} />
                 ) : (
-                  <p>Carousel Loading...</p>
+                  <div>Loading...</div>
                 )}
               </div>
-              <Typography variant="h5" component="h2" gutterBottom style={{paddingTop:"10%"}}>
+              <Typography variant="h5" component="h2" gutterBottom style={{ paddingTop: "10%" }}>
                 <div className="centered-container">
                   <div className="background-suitable">
                     <div className="find-library-heading">
@@ -79,37 +67,37 @@ const App = () => {
 
               {/* Team Profiles Section */}
               {/* Team Profiles Section */}
-<section className="team-section">
-  <Typography 
-    textAlign="center" 
-    margin="40px 0" 
-    variant="h4" 
-    component="h3" 
-    gutterBottom
-    className="team-heading"
-  >
-    Meet Our Team
-  </Typography>
-  <div className="team-grid">
-    {teamProfiles.map((profile) => (
-      <div key={profile.id} className="team-member">
-        <img src={profile.image} alt={profile.name} className="team-avatar" />
-        <Typography variant="body1" className="team-member-name">
-          {profile.name}
-        </Typography>
-      </div>
-    ))}
-  </div>
-</section>
-              
+              <section className="team-section">
+                <Typography
+                  textAlign="center"
+                  margin="40px 0"
+                  variant="h4"
+                  component="h3"
+                  gutterBottom
+                  className="team-heading"
+                >
+                  Meet Our Team
+                </Typography>
+                <div className="team-grid">
+                  {teamProfiles.map((profile) => (
+                    <div key={profile.id} className="team-member">
+                      <img src={profile.image} alt={profile.name} className="team-avatar" />
+                      <Typography variant="body1" className="team-member-name">
+                        {profile.name}
+                      </Typography>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
             </Container>
-          } 
+          }
         />
         {/* Define the route for the /library page */}
         <Route path="/library"
           element={
             libraries ? (
-          <Library />
+              <Library />
             ) : (
               <p>Loading...</p>
             )

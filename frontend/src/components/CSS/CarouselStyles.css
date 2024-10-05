@@ -1,6 +1,9 @@
 /* Carousel Container */
+.carousel-slide {
+    width: 100%;
+}
 .carousel-container {
-    margin-top: 2.5%;
+    /* margin-top: 2.5%; */
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -11,7 +14,7 @@
     width: 100vw;
     max-width: 100%;
     overflow: hidden;
-    padding: 60px 0 30px;
+    padding: 60px 0;
     position: relative;
     z-index: 1;
 }
@@ -57,14 +60,16 @@
 
 /* Carousel */
 .carousel {
-    width: 1600px; /* Set to fit multiple cards */
+    width: 100%; /* Set to fit multiple cards */
+    display: flex;
+    justify-content: center;
 }
 
 /* Card Wrapper */
 .card-wrapper {
     display: flex;
-    justify-content: center;
-    margin-left: 6%;
+    width: 80%;
+    justify-content: space-evenly;
     transition: transform 0.5s ease-in-out; /* Smooth slide */
     will-change: transform; /* Optimize animation */
 }
@@ -72,7 +77,6 @@
 /* Card */
 .card {
     width: 300px;
-    margin-right: 3%;
     background-color: rgb(254, 247, 255);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
@@ -169,7 +173,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10%;
 }
 
 /* Library Description */
@@ -211,8 +214,10 @@
 
 /* Arrows */
 .arrow-prev, .arrow-next {
-    color: black;
-    border: 2px solid black;
+    position: absolute;
+    color: white;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -221,9 +226,8 @@
     align-items: center;
     cursor: pointer;
     font-size: 20px;
-    position: absolute;
-    top: 35%;
-    transform: translateY(-50%);
+    top: 50%;
+    translate: 0 -50%;
     transition: all 0.3s ease;
     z-index: 10;
 }
@@ -238,7 +242,7 @@
 
 .arrow-prev:hover, .arrow-next:hover {
     background-color: rgba(0, 0, 0, 0.1); 
-    transform: translateY(-50%) scale(1.1);
+    transform: scale(1.1);
 }
 
 /* Progress Bar */
@@ -249,7 +253,8 @@
     height: 24px;
     background-color: #f5f1fc;
     border-radius: 12px;
-    margin: 80px auto;
+    margin: 0 auto;
+    margin-top: 60px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
