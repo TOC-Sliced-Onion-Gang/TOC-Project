@@ -13,7 +13,7 @@ const Library = () => {
 
   useEffect(() => {
     setLoading(true); 
-    fetch('http://localhost:5000/search?q=' + encodeURIComponent(searchTerm))
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/search?q=` + encodeURIComponent(searchTerm))
       .then((response) => response.json())
       .then((data) => {
         setLibraries(data);
