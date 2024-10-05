@@ -29,7 +29,7 @@ const CanvaIcon = styled('img')({
 
 const Header: React.FC = () => {
   const handleClick = () => {
-    window.location.href = 'http://127.0.0.1:3000/';
+    window.location.href = 'https://toc.jaychana.me/';
   };
 
   return (
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
             <ResponsiveImage
               src="../icons/pythonlib-icon.jpg" 
               alt="Python Library Logo"        
-              onClick={handleClick} // Click event to redirect to http://localhost:3000/ 
+              onClick={handleClick}
               style={{ cursor: 'pointer' }}
             /> 
           </Typography>
