@@ -13,7 +13,7 @@ const Library = ( ) => {
   const [libraries, setLibraries] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/search?q=' + encodeURIComponent(searchTerm))
+    fetch('http://localhost:5000/search?q=' + searchTerm) //concat
     .then((response) => response.json())
     .then((data) => {
       setLibraries(data); 
