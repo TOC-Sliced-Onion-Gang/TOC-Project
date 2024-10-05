@@ -39,7 +39,6 @@ const App = () => {
   const [libraries, setLibraries] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/random')
     fetch(`${process.env.REACT_APP_BACKEND_URL}/random`)
     .then((response) => response.json())
     .then((data) => {
