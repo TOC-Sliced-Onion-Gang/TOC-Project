@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Cards.tsx";
 import '../CSS/CarouselStyles.css';
 
@@ -36,13 +35,28 @@ const randomImages = [
 ];
 
 const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
-    randomImages.sort(() => Math.random() - 0.5);
-
     const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [assignedImages, setAssignedImages] = useState<{ [key: string]: string }>({}); // Object to store library-to-image mapping
     const visibleCount = 3; // Show 3 cards at a time
     const totalDots = Math.ceil(libraries.length / visibleCount); // Total number of dot indicators
 
     const transitionDuration = 0.5; // Smooth transition duration in seconds
+
+    // Assign a random image to each library (only once)
+    useEffect(() => {
+        const newAssignedImages: { [key: string]: string } = {};
+        const shuffledImages = [...randomImages].sort(() => Math.random() - 0.5);
+
+        libraries.forEach((library, index) => {
+            // Assign a random image only if it hasn't been assigned yet
+            if (!newAssignedImages[library.name] && !assignedImages[library.name]) {
+                newAssignedImages[library.name] = shuffledImages[index % shuffledImages.length];
+            }
+        });
+
+        // Merge the new assigned images with any previously assigned images
+        setAssignedImages((prevImages) => ({ ...prevImages, ...newAssignedImages }));
+    }, [libraries]); // Only re-run if libraries change
 
     const nextSlide = (): void => {
         setCurrentIndex((prevIndex) => (prevIndex + visibleCount) % libraries.length);
@@ -52,10 +66,6 @@ const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
         setCurrentIndex((prevIndex) =>
             (prevIndex - visibleCount + libraries.length) % libraries.length
         );
-    };
-
-    const handleDotHover = (index: number): void => {
-        setCurrentIndex(index * visibleCount);
     };
 
     const handleDotClick = (index: number): void => {
@@ -74,7 +84,11 @@ const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
             <div className="carousel">
                 <div className="card-wrapper">
                     {visibleLibraries.map((library, index) => (
-                        <Card image={randomImages[index]} key={index} library={library} />
+                        <Card 
+                            image={assignedImages[library.name]} // Pass the assigned image
+                            key={index} 
+                            library={library} 
+                        />
                     ))}
                 </div>
             </div>
@@ -86,7 +100,6 @@ const Carousel: React.FC<CarouselProps> = ({ libraries }) => {
                         <div
                             key={dotIndex}
                             className={`dot ${dotIndex === Math.floor(currentIndex / visibleCount) ? 'active' : ''}`}
-                            // onMouseEnter={() => handleDotHover(dotIndex)} // Hovering over the dot will preview that set
                             onClick={() => handleDotClick(dotIndex)} // Clicking will navigate to that set
                         />
                     ))}
